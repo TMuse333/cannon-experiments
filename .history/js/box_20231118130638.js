@@ -9,7 +9,7 @@ export function createBox(world, scene, camera, renderer,ground) {
     const boxBody = new CANNON.Body({
         mass: 4,
         shape: new CANNON.Box(new CANNON.Vec3(1, 1, 1)),
-        position: new CANNON.Vec3(2, 2, 0),
+        position: new CANNON.Vec3(2, 20, 0),
         material: boxPhysMat
     });
 
@@ -38,7 +38,7 @@ export function createBox(world, scene, camera, renderer,ground) {
     function createBoxMesh() {
         const boxGeo = new THREE.BoxGeometry(2, 2, 2);
         const boxMat = new THREE.MeshBasicMaterial({
-            color: 0x0000FF,
+            color: ox0000FF,
             wireframe: false
         });
         const boxMesh = new THREE.Mesh(boxGeo, boxMat);
@@ -50,7 +50,7 @@ export function createBox(world, scene, camera, renderer,ground) {
 
         if (clickedObject === boxMesh) {
             // Apply an impulse to the box in the y-direction
-            boxBody.applyImpulse(new CANNON.Vec3(20, 5, 10), boxBody.position);
+            boxBody.applyImpulse(new CANNON.Vec3(20, 5, 40), boxBody.position);
         }
     }
 

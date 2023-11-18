@@ -6,7 +6,7 @@ import * as CANNON from 'cannon-es';
 import { createBox } from './box.js';
 import { createSphere } from './sphere.js';
 import { createGround } from './ground.js';
-import {createTree} from './tree'
+import {createTree}
 
 
 const renderer = new THREE.WebGLRenderer();
@@ -39,10 +39,7 @@ scene.add(box.mesh);
 const sphere = createSphere(world, scene,camera,renderer,ground);
 scene.add(sphere.mesh);
 
-const tree = createTree(world,scene)
 
-
-const positionOffset = new THREE.Vector3(-10, 2.5, 0);
 
 
 const timeStep = 1 / 60;
@@ -56,8 +53,6 @@ function animate() {
     box.animateBox()
 
     sphere.animateSphere()
-
-    tree.updateTree(positionOffset)
 
   renderer.render(scene, camera);
 }

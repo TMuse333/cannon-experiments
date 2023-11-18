@@ -15,10 +15,10 @@ export function createGround(world, scene) {
     groundBody.quaternion.setFromEuler(-Math.PI / 2, 0, 0);
 
     const groundGeo = new THREE.PlaneGeometry(30, 30);
-    const groundMat = new THREE.MeshBasicMaterial({
+    const groundMat = new THREE.MeshStandardMaterial({
         color: 0x00ff00,
-        side: THREE.DoubleSide,
-     
+        roughness: 0.8, // Adjust the roughness to control the reflection
+        metalness: 0.2, // Adjust the metalness to control the reflection
     });
     const groundMesh = new THREE.Mesh(groundGeo, groundMat);
     scene.add(groundMesh);

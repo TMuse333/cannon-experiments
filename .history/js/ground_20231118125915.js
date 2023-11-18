@@ -18,7 +18,7 @@ export function createGround(world, scene) {
     const groundMat = new THREE.MeshBasicMaterial({
         color: 0x00ff00,
         side: THREE.DoubleSide,
-     
+        wireframe: true
     });
     const groundMesh = new THREE.Mesh(groundGeo, groundMat);
     scene.add(groundMesh);

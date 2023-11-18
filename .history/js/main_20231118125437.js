@@ -42,9 +42,8 @@ scene.add(sphere.mesh);
 const tree = createTree(world,scene)
 
 
-const positionOffset = new THREE.Vector3(-10, 2.5, 0);
 
-
+consr
 const timeStep = 1 / 60;
 
 function animate() {
@@ -57,7 +56,7 @@ function animate() {
 
     sphere.animateSphere()
 
-    tree.updateTree(positionOffset)
+    tree.updateTree()
 
   renderer.render(scene, camera);
 }

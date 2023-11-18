@@ -1,4 +1,3 @@
-// ground.js
 import * as CANNON from 'cannon-es';
 import * as THREE from 'three';
 
@@ -11,14 +10,15 @@ export function createGround(world, scene) {
         material: groundPhysMat
     });
 
+    // Set the rotation to make the ground face down
+    groundBody.quaternion.setFromAxisAngle(new CANNON.Vec3(1, 0, 0), -Math.PI / 2);
+
     world.addBody(groundBody);
-    groundBody.quaternion.setFromEuler(-Math.PI / 2, 0, 0);
 
     const groundGeo = new THREE.PlaneGeometry(30, 30);
     const groundMat = new THREE.MeshBasicMaterial({
         color: 0x00ff00,
         side: THREE.DoubleSide,
-     
     });
     const groundMesh = new THREE.Mesh(groundGeo, groundMat);
     scene.add(groundMesh);
@@ -29,3 +29,4 @@ export function createGround(world, scene) {
         material: groundPhysMat
     };
 }
+
