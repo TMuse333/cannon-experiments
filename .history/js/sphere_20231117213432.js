@@ -22,7 +22,7 @@ export function createSphere(world, scene, camera, renderer, ground) {
   const groundSphereContactMat = new CANNON.ContactMaterial(
     ground.material,
     sphereBody.material, // Fix: Use sphereBody.material instead of sphere.body.material
-    { restitution: 1 }
+    { restitution: 2 }
   );
   world.addContactMaterial(groundSphereContactMat);
 

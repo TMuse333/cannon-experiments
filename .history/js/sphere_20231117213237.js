@@ -3,7 +3,7 @@ import * as CANNON from 'cannon-es';
 import * as THREE from 'three';
 import { createRaycaster } from './raycaster.js';
 
-export function createSphere(world, scene, camera, renderer, ground) {
+export function createSphere(world, scene, camera, renderer,ground) {
   const spherePhysMat = new CANNON.Material();
 
   const sphereBody = new CANNON.Body({
@@ -21,8 +21,8 @@ export function createSphere(world, scene, camera, renderer, ground) {
 
   const groundSphereContactMat = new CANNON.ContactMaterial(
     ground.material,
-    sphereBody.material, // Fix: Use sphereBody.material instead of sphere.body.material
-    { restitution: 1 }
+    sphere.body.material,
+    { restitution: 0.9 }
   );
   world.addContactMaterial(groundSphereContactMat);
 
@@ -52,6 +52,7 @@ export function createSphere(world, scene, camera, renderer, ground) {
     }
   }
 
+
   function animateSphere() {
     // Update the sphere's position and rotation
     sphereMesh.position.copy(sphereBody.position);
@@ -61,6 +62,6 @@ export function createSphere(world, scene, camera, renderer, ground) {
   return {
     mesh: sphereMesh,
     body: sphereBody,
-    animateSphere,
+    animateSphere
   };
 }

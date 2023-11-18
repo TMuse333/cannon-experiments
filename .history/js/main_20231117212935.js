@@ -32,14 +32,26 @@ const world = new CANNON.World({
 
 const ground = createGround(world, scene);
 
-const box = createBox(world, scene,camera,renderer,ground);
+const box = createBox(world, scene);
 scene.add(box.mesh);
 
-const sphere = createSphere(world, scene,camera,renderer,ground);
+const sphere = createSphere(world, scene,camera,renderer);
 scene.add(sphere.mesh);
 
+const groundBoxContactMat = new CANNON.ContactMaterial(
+  ground.material,
+  box.body.material,
+  { friction: 0.04 }
+  { restitution: 0.9 }
+);
+world.addContactMaterial(groundBoxContactMat);
 
-
+const groundSphereContactMat = new CANNON.ContactMaterial(
+  ground.material,
+  sphere.body.material,
+  { restitution: 0.9 }
+);
+world.addContactMaterial(groundSphereContactMat);
 
 const timeStep = 1 / 60;
 

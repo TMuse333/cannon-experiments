@@ -3,7 +3,7 @@ import * as CANNON from 'cannon-es';
 import * as THREE from 'three';
 import { createRaycaster } from './raycaster.js';
 
-export function createBox(world, scene, camera, renderer,ground) {
+export function createBox(world, scene, camera, renderer) {
     const boxPhysMat = new CANNON.Material();
 
     const boxBody = new CANNON.Body({

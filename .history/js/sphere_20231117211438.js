@@ -3,13 +3,13 @@ import * as CANNON from 'cannon-es';
 import * as THREE from 'three';
 import { createRaycaster } from './raycaster.js';
 
-export function createSphere(world, scene, camera, renderer, ground) {
+export function createSphere(world, scene, camera, renderer) {
   const spherePhysMat = new CANNON.Material();
 
   const sphereBody = new CANNON.Body({
     mass: 4,
     shape: new CANNON.Sphere(2),
-    position: new CANNON.Vec3(10, 10, 0),
+    position: new CANNON.Vec3(0, 10, 0),
     material: spherePhysMat,
   });
 
@@ -18,13 +18,6 @@ export function createSphere(world, scene, camera, renderer, ground) {
 
   const sphereMesh = createSphereMesh();
   scene.add(sphereMesh);
-
-  const groundSphereContactMat = new CANNON.ContactMaterial(
-    ground.material,
-    sphereBody.material, // Fix: Use sphereBody.material instead of sphere.body.material
-    { restitution: 1 }
-  );
-  world.addContactMaterial(groundSphereContactMat);
 
   // Add userData to make the sphere clickable
   sphereMesh.userData.clickable = true;
@@ -44,13 +37,14 @@ export function createSphere(world, scene, camera, renderer, ground) {
   }
 
   function onSphereClick(clickedObject) {
-    console.log('Sphere clicked!');
+    console.log('Sphere clicked!', clickedObject);
 
     if (clickedObject === sphereMesh) {
       // Apply an impulse to the sphere in the y-direction
       sphereBody.applyImpulse(new CANNON.Vec3(0, 5, 0), sphereBody.position);
     }
   }
+
 
   function animateSphere() {
     // Update the sphere's position and rotation
@@ -61,6 +55,6 @@ export function createSphere(world, scene, camera, renderer, ground) {
   return {
     mesh: sphereMesh,
     body: sphereBody,
-    animateSphere,
+    animate
   };
 }

@@ -22,9 +22,9 @@ export function createSphere(world, scene, camera, renderer, ground) {
   const groundSphereContactMat = new CANNON.ContactMaterial(
     ground.material,
     sphereBody.material, // Fix: Use sphereBody.material instead of sphere.body.material
-    { restitution: 1 }
+    { restitution: 0.9 }
   );
-  world.addContactMaterial(groundSphereContactMat);
+//   world.addContactMaterial(groundSphereContactMat);
 
   // Add userData to make the sphere clickable
   sphereMesh.userData.clickable = true;
