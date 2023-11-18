@@ -1,0 +1,1 @@
+const { handleMouseClick } = setupRaycaster(camera);
