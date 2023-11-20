@@ -54,7 +54,7 @@ loader.load('../blender/rocketship2.gltf', function (gltf) {
  
 });
 
-
+console.log(rocketBody)
 
 function animateRocket() {
 //     if (rocketBody) {

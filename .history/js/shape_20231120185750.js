@@ -2,7 +2,6 @@
 
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
-import * as CANNON from 'cannon-es'
 
 // Function to traverse the model and find the first mesh
 function findMesh(object) {

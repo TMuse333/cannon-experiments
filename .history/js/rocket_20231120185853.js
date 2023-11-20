@@ -9,7 +9,7 @@ export async function createRocket(world, scene, camera, renderer,ground) {
     try {
         const geometry = await loadAndFindShape('../blender/rocketship2.gltf');
         
-        const rocketShape = createCannonShape(geometry);
+        
 
         const rocketMat = new CANNON.Material();
     
@@ -20,7 +20,7 @@ export async function createRocket(world, scene, camera, renderer,ground) {
           material: rocketMat,
         });
     
-        world.addBody(rocketBody);
+        world.add(rocketBody);
     
         // Now you can use rocketShape globally
       
@@ -53,8 +53,6 @@ loader.load('../blender/rocketship2.gltf', function (gltf) {
 
  
 });
-
-
 
 function animateRocket() {
 //     if (rocketBody) {

@@ -2,37 +2,25 @@ import * as THREE from 'three';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js'
 import * as CANNON from 'cannon-es'
 import { loadAndFindShape } from './shape';
-import { createCannonShape } from './shape';
+
 export async function createRocket(world, scene, camera, renderer,ground) {
 
 
-    try {
-        const geometry = await loadAndFindShape('../blender/rocketship2.gltf');
-        
-        const rocketShape = createCannonShape(geometry);
-
-        const rocketMat = new CANNON.Material();
-    
-        const rocketBody = new CANNON.Body({
-          mass: 4,
-          shape: rocketShape,
-          position: new CANNON.Vec3(0, 5, 0),
-          material: rocketMat,
-        });
-    
-        world.addBody(rocketBody);
-    
-        // Now you can use rocketShape globally
-      
-    
-      } catch (error) {
-        console.error('Error loading rocket model:', error);
-        // Handle the error appropriately
-      }
-    
-
-
 const loader = new GLTFLoader();
+
+const rocketShape = await loadAndFindShape('../blender/rocketship2.gltf')
+
+// const rocketMat = new CANNON.Material();
+
+// const rocketBody = new CANNON.Body({
+//     mass: 4,
+//     shape: rocketShape,
+//     position: new CANNON.Vec3(0, 5, 0),
+//     material: rocketMat,
+//   });
+
+  
+
 
 loader.load('../blender/rocketship2.gltf', function (gltf) {
     
@@ -53,8 +41,6 @@ loader.load('../blender/rocketship2.gltf', function (gltf) {
 
  
 });
-
-
 
 function animateRocket() {
 //     if (rocketBody) {

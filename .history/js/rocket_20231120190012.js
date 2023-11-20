@@ -54,8 +54,6 @@ loader.load('../blender/rocketship2.gltf', function (gltf) {
  
 });
 
-
-
 function animateRocket() {
 //     if (rocketBody) {
 //       // Update the rocket's position and rotation

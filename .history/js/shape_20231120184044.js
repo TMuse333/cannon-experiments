@@ -2,7 +2,6 @@
 
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
-import * as CANNON from 'cannon-es'
 
 // Function to traverse the model and find the first mesh
 function findMesh(object) {
@@ -34,11 +33,14 @@ export function loadAndFindShape(url) {
       // Use the function to find the first mesh
       const mesh = findMesh(model);
 
-      if (mesh && mesh.geometry) {
+      if (mesh) {
         // Access the geometry of the mesh
-        resolve(mesh.geometry);
+        const geometry = mesh.geometry;
+
+        // Now you can use the 'geometry' to access properties like vertices, faces, etc.
+        resolve(geometry);
       } else {
-        reject("No mesh or geometry found in the GLTF model.");
+        reject("No mesh found in the GLTF model.");
       }
     }, null, function (error) {
       reject(error);
@@ -46,16 +48,3 @@ export function loadAndFindShape(url) {
   });
 }
 
-export function createCannonShape(geometry) {
-    const vertices = geometry.attributes.position.array;
-    const indices = geometry.index ? geometry.index.array : undefined;
-  
-    if (indices) {
-      return new CANNON.Trimesh(vertices, indices);
-    } else {
-      const hull = new CANNON.ConvexPolyhedron({ vertices });
-      hull.updateNormals();
-      hull.updateBoundingSphereRadius();
-      return hull;
-    }
-  }
