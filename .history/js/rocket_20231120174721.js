@@ -1,4 +1,3 @@
-
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import * as CANNON from 'cannon-es';
@@ -20,6 +19,9 @@ function createCannonShape(geometry) {
   const indices = geometry.index ? geometry.index.array : undefined;
 
   if (indices) {
+    console.log('Vertices:', geometry.attributes.position.array);
+console.log('Indices:', geometry.index ? geometry.index.array : 'None');
+
     return new CANNON.Trimesh(vertices, indices);
   } else {
     const hull = new CANNON.ConvexPolyhedron({ vertices });
@@ -35,8 +37,8 @@ export async function createRocket(world, scene, camera, renderer, ground) {
 
   const cylinderRadiusTop = 1;
   const cylinderRadiusBottom = 0.1;
-  const cylinderHeight = 0.01;
-  const cylinderNumSegments = 16;
+  const cylinderHeight = 0.000001;
+  const cylinderNumSegments = 8;
 
   const temp = new CANNON.Cylinder(
     cylinderRadiusTop,
@@ -61,13 +63,13 @@ export async function createRocket(world, scene, camera, renderer, ground) {
 
    const rocketBody = new CANNON.Body({
       mass: 4,
-      shape: temp,
+      shape: rocketGeo,
       position: new CANNON.Vec3(0, 5, 0),
       material: rocketMat,
     });
 
     world.addBody(rocketBody);
-    console.log(rocketBody.material)
+    // console.log(rocketBody.material)
 
     const groundRocketContactMat = new CANNON.ContactMaterial(
       ground.material,
@@ -92,3 +94,8 @@ export async function createRocket(world, scene, camera, renderer, ground) {
     throw error;
   }
 }
+
+// Example usage:
+
+
+// Now you can use animateRocket, rocketBody, and rocketGeo directly.

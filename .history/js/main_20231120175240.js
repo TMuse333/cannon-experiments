@@ -37,19 +37,6 @@ const camera = new THREE.PerspectiveCamera(
   1000
 );
 
-// main.js or another module
-
-// import { loadAndFindShape } from './shape.js';
-
-// const url = '../blender/rocketship2.gltf';
-// loadAndFindShape(url)
-//   .then(geometry => {
-//     console.log(geometry);
-//     // Do something with the geometry
-//   })
-//   .catch(error => {
-//     console.error(error);
-//   });
 
 
 
@@ -77,7 +64,7 @@ const tree = createTree(world,scene)
 
 // const rocket = createRocket(world, scene,camera,renderer,ground)
 
-const { animateRocket, rocketBody, rocketGeo } = await createRocket(world, scene, camera, renderer, ground);
+// const { animateRocket, rocketBody, rocketGeo } = await createRocket(world, scene, camera, renderer, ground);
 
 
 
@@ -99,7 +86,7 @@ function animate() {
 
     tree.updateTree(positionOffset)
 
-  animateRocket()
+  // animateRocket()
     
 
   renderer.render(scene, camera);

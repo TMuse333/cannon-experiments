@@ -1,4 +1,3 @@
-
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import * as CANNON from 'cannon-es';
@@ -92,3 +91,8 @@ export async function createRocket(world, scene, camera, renderer, ground) {
     throw error;
   }
 }
+
+// Example usage:
+
+
+// Now you can use animateRocket, rocketBody, and rocketGeo directly.

@@ -1,4 +1,3 @@
-
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import * as CANNON from 'cannon-es';
@@ -33,35 +32,22 @@ export async function createRocket(world, scene, camera, renderer, ground) {
   
   let rocketGeo;
 
-  const cylinderRadiusTop = 1;
-  const cylinderRadiusBottom = 0.1;
-  const cylinderHeight = 0.01;
-  const cylinderNumSegments = 16;
-
-  const temp = new CANNON.Cylinder(
-    cylinderRadiusTop,
-    cylinderRadiusBottom,
-    cylinderHeight,
-    cylinderNumSegments
-  );
- 
-
   try {
     const gltf = await loadModel('../blender/rocketship2.gltf');
     
     gltf.scene.position.set(0, 5, 0);
 
     gltf.scene.traverse(function (child) {
-      if (child.isMesh) {
+      
         rocketGeo = createCannonShape(child.geometry);
-      }
+      
     });
 
     const rocketMat = new CANNON.Material();
 
    const rocketBody = new CANNON.Body({
       mass: 4,
-      shape: temp,
+      shape: rocketGeo,
       position: new CANNON.Vec3(0, 5, 0),
       material: rocketMat,
     });
@@ -72,7 +58,7 @@ export async function createRocket(world, scene, camera, renderer, ground) {
     const groundRocketContactMat = new CANNON.ContactMaterial(
       ground.material,
       rocketBody.material,
-      
+      { friction: 0.04 }
     );
     world.addContactMaterial(groundRocketContactMat);
 
@@ -92,3 +78,8 @@ export async function createRocket(world, scene, camera, renderer, ground) {
     throw error;
   }
 }
+
+// Example usage:
+
+
+// Now you can use animateRocket, rocketBody, and rocketGeo directly.

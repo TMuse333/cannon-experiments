@@ -77,7 +77,7 @@ const tree = createTree(world,scene)
 
 // const rocket = createRocket(world, scene,camera,renderer,ground)
 
-const { animateRocket, rocketBody, rocketGeo } = await createRocket(world, scene, camera, renderer, ground);
+// const { animateRocket, rocketBody, rocketGeo } = await createRocket(world, scene, camera, renderer, ground);
 
 
 
@@ -99,7 +99,7 @@ function animate() {
 
     tree.updateTree(positionOffset)
 
-  animateRocket()
+  // animateRocket()
     
 
   renderer.render(scene, camera);

@@ -37,19 +37,6 @@ const camera = new THREE.PerspectiveCamera(
   1000
 );
 
-// main.js or another module
-
-// import { loadAndFindShape } from './shape.js';
-
-// const url = '../blender/rocketship2.gltf';
-// loadAndFindShape(url)
-//   .then(geometry => {
-//     console.log(geometry);
-//     // Do something with the geometry
-//   })
-//   .catch(error => {
-//     console.error(error);
-//   });
 
 
 
@@ -93,7 +80,7 @@ function animate() {
   ground.mesh.position.copy(ground.body.position);
   ground.mesh.quaternion.copy(ground.body.quaternion);
 
-    // box.animateBox()
+    box.animateBox()
 
     sphere.animateSphere()
 

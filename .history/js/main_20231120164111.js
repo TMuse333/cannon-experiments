@@ -37,19 +37,6 @@ const camera = new THREE.PerspectiveCamera(
   1000
 );
 
-// main.js or another module
-
-// import { loadAndFindShape } from './shape.js';
-
-// const url = '../blender/rocketship2.gltf';
-// loadAndFindShape(url)
-//   .then(geometry => {
-//     console.log(geometry);
-//     // Do something with the geometry
-//   })
-//   .catch(error => {
-//     console.error(error);
-//   });
 
 
 
@@ -67,8 +54,8 @@ const world = new CANNON.World({
 
 const ground = createGround(world, scene);
 
-// const box = createBox(world, scene,camera,renderer,ground);
-// scene.add(box.mesh);
+const box = createBox(world, scene,camera,renderer,ground);
+scene.add(box.mesh);
 
 const sphere = createSphere(world, scene,camera,renderer,ground);
 scene.add(sphere.mesh);
@@ -76,8 +63,6 @@ scene.add(sphere.mesh);
 const tree = createTree(world,scene)
 
 // const rocket = createRocket(world, scene,camera,renderer,ground)
-
-const { animateRocket, rocketBody, rocketGeo } = await createRocket(world, scene, camera, renderer, ground);
 
 
 
@@ -93,13 +78,13 @@ function animate() {
   ground.mesh.position.copy(ground.body.position);
   ground.mesh.quaternion.copy(ground.body.quaternion);
 
-    // box.animateBox()
+    box.animateBox()
 
     sphere.animateSphere()
 
     tree.updateTree(positionOffset)
 
-  animateRocket()
+  //  rocket.animateRocket()
     
 
   renderer.render(scene, camera);

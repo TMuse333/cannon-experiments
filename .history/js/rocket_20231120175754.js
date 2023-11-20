@@ -1,7 +1,7 @@
-
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import * as CANNON from 'cannon-es';
+import { loadAndFindShape } from './shape.js';
 
 function loadModel(url) {
   return new Promise((resolve, reject) => {
@@ -15,19 +15,28 @@ function loadModel(url) {
   });
 }
 
-function createCannonShape(geometry) {
-  const vertices = geometry.attributes.position.array;
-  const indices = geometry.index ? geometry.index.array : undefined;
 
-  if (indices) {
-    return new CANNON.Trimesh(vertices, indices);
-  } else {
-    const hull = new CANNON.ConvexPolyhedron({ vertices });
-    hull.updateNormals();
-    hull.updateBoundingSphereRadius();
-    return hull;
-  }
-}
+    const url = '../blender/rocketship2.gltf';
+    const rocketMat = new CANNON.Material();
+    
+    const rocketBody = new CANNON.Body({
+      mass: 4,
+      position: new CANNON.Vec3(0, 5, 0),
+      material: rocketMat,
+    });
+    
+    loadAndFindShape(url, rocketBody.shape)
+      .then(cannonShape => {
+        rocketBody.shape = cannonShape;
+        // Continue with other setup or use the rocket body as needed
+      })
+      .catch(error => {
+        console.error(error);
+      });
+
+    world.addBody(rocketBody);
+
+
 
 export async function createRocket(world, scene, camera, renderer, ground) {
   
@@ -35,8 +44,8 @@ export async function createRocket(world, scene, camera, renderer, ground) {
 
   const cylinderRadiusTop = 1;
   const cylinderRadiusBottom = 0.1;
-  const cylinderHeight = 0.01;
-  const cylinderNumSegments = 16;
+  const cylinderHeight = 0.000001;
+  const cylinderNumSegments = 8;
 
   const temp = new CANNON.Cylinder(
     cylinderRadiusTop,
@@ -51,23 +60,14 @@ export async function createRocket(world, scene, camera, renderer, ground) {
     
     gltf.scene.position.set(0, 5, 0);
 
-    gltf.scene.traverse(function (child) {
-      if (child.isMesh) {
-        rocketGeo = createCannonShape(child.geometry);
-      }
-    });
+    console.log(gltf)
 
-    const rocketMat = new CANNON.Material();
 
-   const rocketBody = new CANNON.Body({
-      mass: 4,
-      shape: temp,
-      position: new CANNON.Vec3(0, 5, 0),
-      material: rocketMat,
-    });
 
-    world.addBody(rocketBody);
-    console.log(rocketBody.material)
+   
+
+
+    // console.log(rocketBody.material)
 
     const groundRocketContactMat = new CANNON.ContactMaterial(
       ground.material,
@@ -92,3 +92,8 @@ export async function createRocket(world, scene, camera, renderer, ground) {
     throw error;
   }
 }
+
+// Example usage:
+
+
+// Now you can use animateRocket, rocketBody, and rocketGeo directly.

@@ -1,4 +1,3 @@
-
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import * as CANNON from 'cannon-es';
@@ -34,8 +33,8 @@ export async function createRocket(world, scene, camera, renderer, ground) {
   let rocketGeo;
 
   const cylinderRadiusTop = 1;
-  const cylinderRadiusBottom = 0.1;
-  const cylinderHeight = 0.01;
+  const cylinderRadiusBottom = 1;
+  const cylinderHeight = 0.5;
   const cylinderNumSegments = 16;
 
   const temp = new CANNON.Cylinder(
@@ -72,7 +71,7 @@ export async function createRocket(world, scene, camera, renderer, ground) {
     const groundRocketContactMat = new CANNON.ContactMaterial(
       ground.material,
       rocketBody.material,
-      
+      { friction: 0.04 }
     );
     world.addContactMaterial(groundRocketContactMat);
 
@@ -92,3 +91,8 @@ export async function createRocket(world, scene, camera, renderer, ground) {
     throw error;
   }
 }
+
+// Example usage:
+
+
+// Now you can use animateRocket, rocketBody, and rocketGeo directly.
