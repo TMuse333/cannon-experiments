@@ -1,12 +1,16 @@
 // main.js
 
 import * as THREE from 'three';
+
+
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import * as CANNON from 'cannon-es';
 import { createBox } from './box.js';
 import { createSphere } from './sphere.js';
 import { createGround } from './ground.js';
 import {createTree} from './tree'
+import { createRocket } from './rocket.js';
+
 
 
 const renderer = new THREE.WebGLRenderer();
@@ -15,12 +19,29 @@ document.body.appendChild(renderer.domElement);
 
 const scene = new THREE.Scene();
 
+
+const directionalLight = new THREE.DirectionalLight(0xffffff, 2); // Increased intensity
+directionalLight.position.set(-1, 1, -1).normalize(); // Adjusted direction
+scene.add(directionalLight);
+
+// Add ambient light
+const ambientLight = new THREE.AmbientLight(0x404040); // soft white light
+scene.add(ambientLight);
+
+
+
 const camera = new THREE.PerspectiveCamera(
   45,
   window.innerWidth / window.innerHeight,
   0.1,
   1000
 );
+
+
+
+
+
+
 
 const orbit = new OrbitControls(camera, renderer.domElement);
 camera.position.set(0, 20, -30);
@@ -41,6 +62,8 @@ scene.add(sphere.mesh);
 
 const tree = createTree(world,scene)
 
+const rocket = createRocket(scene,world)
+
 
 const positionOffset = new THREE.Vector3(-10, 2.5, 0);
 
@@ -58,6 +81,8 @@ function animate() {
     sphere.animateSphere()
 
     tree.updateTree(positionOffset)
+
+    
 
   renderer.render(scene, camera);
 }

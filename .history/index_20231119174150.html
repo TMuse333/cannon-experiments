@@ -1,0 +1,25 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Web App</title>
+</head>
+<body>
+  <div id="app"></div>
+  <script type="module">
+    import * as THREE from 'three';
+
+    // Add your GLB loading logic here using THREE.GLTFLoader
+    const loader = new THREE.GLTFLoader();
+    loader.load('..blender/rocketship1.glb', (gltf) => {
+      // Handle loaded GLB model
+      const model = gltf.scene;
+      // Add your rendering or other logic here
+    });
+  </script>
+
+  <script type="module" src="./js/main.js"></script>
+</body>
+</html>
