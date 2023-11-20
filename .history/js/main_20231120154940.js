@@ -62,9 +62,7 @@ scene.add(sphere.mesh);
 
 const tree = createTree(world,scene)
 
-const rocket = createRocket(world, scene,camera,renderer,ground)
-
-
+const { animateRocket } = createRocket(world, scene, camera, renderer, ground);
 
 
 const positionOffset = new THREE.Vector3(-10, 2.5, 0);
@@ -84,7 +82,7 @@ function animate() {
 
     tree.updateTree(positionOffset)
 
-  //  rocket.animateRocket()
+    rocket.animateRocket()
     
 
   renderer.render(scene, camera);

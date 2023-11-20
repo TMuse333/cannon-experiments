@@ -25,7 +25,7 @@ const loader = new GLTFLoader();
 
 
 
-
+let rocketGeo
 
 loader.load('../blender/rocketship2.gltf', function (gltf) {
 
@@ -37,7 +37,7 @@ loader.load('../blender/rocketship2.gltf', function (gltf) {
 
 // gltf.scene.rotation.set(0, rotationInRadians, 0);
 
-let rocketGeo
+
 
 gltf.scene.traverse( function ( child ) {
 
@@ -83,16 +83,27 @@ world.addContactMaterial(groundRocketContactMat);
  
 });
 
+console.log(ro)
+
+
+
+
+
+
 
 function animateRocket() {
 
 
+    if (rocketBody) {
+
+        const rocketMesh = gltf.scene.children[0];
+      console.log(rocketBody.position)
        
         rocketMesh.position.copy(rocketBody.position);
         rocketMesh.quaternion.copy(rocketBody.quaternion);
 
 
-    
+    }
   }
 
   return { animateRocket}

@@ -22,11 +22,6 @@ export function createRocket(world, scene, camera, renderer,ground) {
 
 const loader = new GLTFLoader();
 
-
-
-
-
-
 loader.load('../blender/rocketship2.gltf', function (gltf) {
 
   gltf.scene.position.set(0, 5, 0);
@@ -56,18 +51,14 @@ gltf.scene.traverse( function ( child ) {
 
 const rocketMat = new CANNON.Material
 
- const rocketBody = new CANNON.Body({
+const rocketBody = new CANNON.Body({
     mass: 4,
     shape: rocketGeo,
     position: new CANNON.Vec3(0, 5, 0),
     material: rocketMat
 });
 
-console.log(rocketBody)
-
 world.addBody(rocketBody);
-
-
 
 const groundRocketContactMat = new CANNON.ContactMaterial(
     ground.material,
@@ -79,22 +70,30 @@ world.addContactMaterial(groundRocketContactMat);
   // Add the loaded model to the scene
   scene.add(gltf.scene);
 
+  
 
  
 });
 
-
 function animateRocket() {
+    if (rocketBody) {
 
-
-       
+        const rocketMesh = gltf.scene.children[0];
+      console.log(rocketBody.position)
+        // Update the rocket's position and rotation
         rocketMesh.position.copy(rocketBody.position);
         rocketMesh.quaternion.copy(rocketBody.quaternion);
 
 
-    
+    }
   }
 
   return { animateRocket}
+
+
+
+
+
+
 
 }

@@ -84,7 +84,7 @@ function animate() {
 
     tree.updateTree(positionOffset)
 
-  //  rocket.animateRocket()
+   rocket.animateRocket()
     
 
   renderer.render(scene, camera);

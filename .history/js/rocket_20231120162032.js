@@ -56,7 +56,7 @@ gltf.scene.traverse( function ( child ) {
 
 const rocketMat = new CANNON.Material
 
- const rocketBody = new CANNON.Body({
+const rocketBody = new CANNON.Body({
     mass: 4,
     shape: rocketGeo,
     position: new CANNON.Vec3(0, 5, 0),
@@ -83,16 +83,27 @@ world.addContactMaterial(groundRocketContactMat);
  
 });
 
+console.log(rocketBody)
+
+
+
+
+
+
 
 function animateRocket() {
 
 
+    if (rocketBody) {
+
+        const rocketMesh = gltf.scene.children[0];
+      console.log(rocketBody.position)
        
         rocketMesh.position.copy(rocketBody.position);
         rocketMesh.quaternion.copy(rocketBody.quaternion);
 
 
-    
+    }
   }
 
   return { animateRocket}

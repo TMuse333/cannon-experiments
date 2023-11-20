@@ -87,6 +87,10 @@ world.addContactMaterial(groundRocketContactMat);
 function animateRocket() {
 
 
+    if (rocketBody) {
+
+        const rocketMesh = gltf.scene.children[0];
+      console.log(rocketBody.position)
        
         rocketMesh.position.copy(rocketBody.position);
         rocketMesh.quaternion.copy(rocketBody.quaternion);
