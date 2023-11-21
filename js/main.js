@@ -71,15 +71,35 @@ const ground = createGround(world, scene);
 // scene.add(box.mesh);
 
 const sphere = createSphere(world, scene,camera,renderer,ground);
-scene.add(sphere.mesh);
+
+console.log(sphere.mesh)
 
 const tree = createTree(world,scene)
 
-const rocket = createRocket(world, scene,camera,renderer,ground)
+// const rocket = createRocket(world, scene,camera,renderer,ground)
 
-// const { animateRocket, rocketBody, rocketGeo } = await createRocket(world, scene, camera, renderer, ground);
+const { animateRocket, rocketBody, rocketGeo } = await createRocket(world, scene, camera, renderer, ground);
 
+const rocketBody2 = new CANNON.Body({
+  mass: 4,
+  shape: rocketGeo,
+  position: new CANNON.Vec3(3, 10, 0),
+  material: new CANNON.Material(),
+});
 
+world.addBody(rocketBody);
+
+console.log(rocketGeo)
+
+// const groundRocketContactMat = new CANNON.ContactMaterial(
+//   ground.material,
+//   rocketBody.material,
+  
+// );
+// console.log(ground.material)
+// console.log(rocketBody.material)
+
+// world.addContactMaterial(groundRocketContactMat);
 
 
 const positionOffset = new THREE.Vector3(-10, 2.5, 0);
@@ -99,12 +119,31 @@ function animate() {
 
     tree.updateTree(positionOffset)
 
+    animateRocket()
+
+    
+    // console.log(rocketBody.position)
+
   // rocket.animateRocket()
     
 
   renderer.render(scene, camera);
 }
 
+
+
 renderer.setAnimationLoop(animate);
+
+// function logRocketPosition() {
+//   console.log(rocketBody.position);
+// }
+
+
+// const intervalId = setInterval(logRocketPosition, 100);
+
+
+// setTimeout(() => {
+//   clearInterval(intervalId);
+// }, 10000);
 
 

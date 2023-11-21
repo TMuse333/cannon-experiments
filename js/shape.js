@@ -47,15 +47,20 @@ export function loadAndFindShape(url) {
 }
 
 export function createCannonShape(geometry) {
+    console.log('hello?')
     const vertices = geometry.attributes.position.array;
     const indices = geometry.index ? geometry.index.array : undefined;
   
     if (indices) {
-      return new CANNON.Trimesh(vertices, indices);
+        const shape = new CANNON.Trimesh(vertices, indices);
+        console.log('indice shape',shape)
+      return shape
     } else {
+        console.log('damn cannon')
       const hull = new CANNON.ConvexPolyhedron({ vertices });
       hull.updateNormals();
       hull.updateBoundingSphereRadius();
+      console.log('the shape',hull)
       return hull;
     }
   }

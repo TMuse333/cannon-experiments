@@ -6,12 +6,17 @@ import { createRaycaster } from './raycaster.js';
 export function createSphere(world, scene, camera, renderer, ground) {
   const spherePhysMat = new CANNON.Material();
 
+  const shape = new CANNON.Sphere(2)
+
+
   const sphereBody = new CANNON.Body({
     mass: 4,
-    shape: new CANNON.Sphere(2),
+    shape: shape,
     position: new CANNON.Vec3(10, 10, 0),
     material: spherePhysMat,
   });
+
+  console.log(shape)
 
   world.addBody(sphereBody);
   sphereBody.linearDamping = 0.21;
@@ -25,6 +30,7 @@ export function createSphere(world, scene, camera, renderer, ground) {
     { restitution: 1 }
   );
   world.addContactMaterial(groundSphereContactMat);
+  // console.log(groundSphereContactMat)
 
   // Add userData to make the sphere clickable
   sphereMesh.userData.clickable = true;
