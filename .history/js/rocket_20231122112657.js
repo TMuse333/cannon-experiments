@@ -1,6 +1,12 @@
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader';
 import { threeToCannon, ShapeType } from 'three-to-cannon';
+
+export function createRocket(scene, world) {
+
+  import * as THREE from 'three';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader';
+import { threeToCannon, ShapeType } from 'three-to-cannon';
 import * as CANNON from 'cannon-es';
 import { createGround } from './ground';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
@@ -52,34 +58,14 @@ gltfLoader.load(gltfPath, (gltf) => {
   // Add the body to the world
   world.addBody(cannonBody);
 
-  const ground = createGround(world,scene)
 
-  const controls = new OrbitControls(camera, renderer.domElement);
-  controls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
-  controls.dampingFactor = 0.25;
-  controls.screenSpacePanning = false;
-  controls.maxPolarAngle = Math.PI / 2;
+ 
 
 
 
   // Render loop
-  const animate = function () {
-    requestAnimationFrame(animate);
-
-    // Step the Cannon.js physics world forward in time
-    world.step(1 / 60);
-
-    // Update the three.js object position and rotation based on the Cannon.js body
-    object3D.position.copy(cannonBody.position).add(new THREE.Vector3(0, -0.45, 0));
-    object3D.quaternion.copy(cannonBody.quaternion);
-
-    ground.mesh.position.copy(ground.body.position);
-    ground.mesh.quaternion.copy(ground.body.quaternion);
-
-
-
-    renderer.render(scene, camera);
-  };
-
-  animate();
+  
 });
+
+
+}

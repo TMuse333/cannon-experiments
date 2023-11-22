@@ -6,19 +6,19 @@ import { createGround } from './ground';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 
 
-
+// Load GLTF file
 const gltfPath = '../blender/scene-2.gltf';
 const gltfLoader = new GLTFLoader();
 gltfLoader.load(gltfPath, (gltf) => {
-  
+  // Assuming the main object is the first scene in the GLTF file
   const object3D = gltf.scene;
 
   const result = threeToCannon(object3D, { type: ShapeType.BOX }); // Change the shape type as needed
 
-
+  // Using the result
   const { shape, offset, quaternion } = result;
 
-
+  // Set up three.js scene for visualization
   const scene = new THREE.Scene();
   scene.add(object3D);
 

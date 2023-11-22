@@ -15,10 +15,10 @@ gltfLoader.load(gltfPath, (gltf) => {
 
   const result = threeToCannon(object3D, { type: ShapeType.BOX }); // Change the shape type as needed
 
-
+  // Using the result
   const { shape, offset, quaternion } = result;
 
-
+  // Set up three.js scene for visualization
   const scene = new THREE.Scene();
   scene.add(object3D);
 

@@ -1,6 +1,12 @@
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader';
 import { threeToCannon, ShapeType } from 'three-to-cannon';
+
+export function createRocket(scene, world) {
+
+  import * as THREE from 'three';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader';
+import { threeToCannon, ShapeType } from 'three-to-cannon';
 import * as CANNON from 'cannon-es';
 import { createGround } from './ground';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
@@ -83,3 +89,6 @@ gltfLoader.load(gltfPath, (gltf) => {
 
   animate();
 });
+
+
+}

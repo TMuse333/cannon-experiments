@@ -1,5 +1,3 @@
-// rocket.js
-
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader';
 import { threeToCannon, ShapeType } from 'three-to-cannon';
@@ -31,8 +29,8 @@ export function createRocket(scene, world) {
         object3D.quaternion.copy(cannonBody.quaternion);
       }
 
-      // Resolve the Promise with the object containing object3D and cannonBody
-      resolve({ object3D, cannonBody, animateRocket });
+      // Resolve the Promise with an object containing the animateRocket function
+      resolve({ animateRocket });
     });
   });
 }

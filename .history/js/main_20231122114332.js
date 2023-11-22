@@ -32,11 +32,6 @@ const world = new CANNON.World({
 const ground = createGround(world, scene);
 
 // Use a promise to ensure the rocket is fully loaded
-// main.js
-
-// ... (previous code)
-
-// Use a promise to ensure the rocket is fully loaded
 createRocket(scene, world).then((rocket) => {
   const timeStep = 1 / 60;
 
@@ -57,4 +52,3 @@ createRocket(scene, world).then((rocket) => {
 
   renderer.setAnimationLoop(animate);
 });
-
