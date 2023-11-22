@@ -45,7 +45,7 @@ const createCannonShape = (mesh) => {
     }
     console.log('Indices:', indices);
     const shape = new CANNON.ConvexPolyhedron(vertices, indices);
-    console.log('cannon shape',shape)
+    console.log('cannon shape',)
     return shape
   } else {
     // Default to a box shape if the geometry type is not recognized

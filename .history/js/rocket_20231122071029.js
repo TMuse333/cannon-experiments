@@ -39,6 +39,7 @@ export async function createRocket(world, scene, camera, renderer, ground) {
   const cylinderNumSegments = 16;
 
 
+
   const temp = new CANNON.Cylinder(
     cylinderRadiusTop,
     cylinderRadiusBottom,
@@ -59,8 +60,6 @@ export async function createRocket(world, scene, camera, renderer, ground) {
     });
 
     const rocketMat = new CANNON.Material();
-
-    
 
    const rocketBody = new CANNON.Body({
       mass: 4,

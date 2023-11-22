@@ -60,7 +60,24 @@ export async function createRocket(world, scene, camera, renderer, ground) {
 
     const rocketMat = new CANNON.Material();
 
-    
+    async function loadAndConvertModel() {
+  // Replace 'path/to/your/model.gltf' with the actual path to your glTF file
+  const filePath = '../blender/scene-2.gltf';
+
+  try {
+    // Call the gtlfToCannon function
+    const cannonShapes = await gtlfToCannon(filePath);
+
+    // Print out the Cannon.js shapes
+    console.log('Cannon.js Shapes:', cannonShapes);
+
+  } catch (error) {
+    console.error('Error loading and converting model:', error);
+  }
+}
+
+// Call the function
+loadAndConvertModel();
 
    const rocketBody = new CANNON.Body({
       mass: 4,

@@ -3,31 +3,7 @@ import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import * as CANNON from 'cannon-es';
 
-function loadModel(url) {
-  return new Promise((resolve, reject) => {
-    const loader = new GLTFLoader();
 
-    loader.load(url, function (gltf) {
-      resolve(gltf);
-    }, null, function (error) {
-      reject(error);
-    });
-  });
-}
-
-function createCannonShape(geometry) {
-  const vertices = geometry.attributes.position.array;
-  const indices = geometry.index ? geometry.index.array : undefined;
-
-  if (indices) {
-    return new CANNON.Trimesh(vertices, indices);
-  } else {
-    const hull = new CANNON.ConvexPolyhedron({ vertices });
-    hull.updateNormals();
-    hull.updateBoundingSphereRadius();
-    return hull;
-  }
-}
 
 export async function createRocket(world, scene, camera, renderer, ground) {
   
@@ -37,7 +13,6 @@ export async function createRocket(world, scene, camera, renderer, ground) {
   const cylinderRadiusBottom = 0.1;
   const cylinderHeight = 0.01;
   const cylinderNumSegments = 16;
-
 
   const temp = new CANNON.Cylinder(
     cylinderRadiusTop,
@@ -59,8 +34,6 @@ export async function createRocket(world, scene, camera, renderer, ground) {
     });
 
     const rocketMat = new CANNON.Material();
-
-    
 
    const rocketBody = new CANNON.Body({
       mass: 4,

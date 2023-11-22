@@ -1,7 +1,7 @@
-
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import * as CANNON from 'cannon-es';
+import { gtlfToCannon } from './gltfToCannon';
 
 function loadModel(url) {
   return new Promise((resolve, reject) => {
@@ -30,7 +30,6 @@ function createCannonShape(geometry) {
 }
 
 export async function createRocket(world, scene, camera, renderer, ground) {
-  
   let rocketGeo;
 
   const cylinderRadiusTop = 1;
@@ -38,18 +37,16 @@ export async function createRocket(world, scene, camera, renderer, ground) {
   const cylinderHeight = 0.01;
   const cylinderNumSegments = 16;
 
-
   const temp = new CANNON.Cylinder(
     cylinderRadiusTop,
     cylinderRadiusBottom,
     cylinderHeight,
     cylinderNumSegments
   );
- 
 
   try {
     const gltf = await loadModel('../blender/rocketship2.gltf');
-    
+
     gltf.scene.position.set(0, 5, 0);
 
     gltf.scene.traverse(function (child) {
@@ -60,28 +57,8 @@ export async function createRocket(world, scene, camera, renderer, ground) {
 
     const rocketMat = new CANNON.Material();
 
-    
-
-   const rocketBody = new CANNON.Body({
-      mass: 4,
-      shape: temp,
-      position: new CANNON.Vec3(0, 5, 0),
-      material: rocketMat,
-    });
-
-    world.addBody(rocketBody);
-    console.log(rocketBody.material)
-
-    const groundRocketContactMat = new CANNON.ContactMaterial(
-      ground.material,
-      rocketBody.material,
-      
-    );
-    world.addContactMaterial(groundRocketContactMat);
-
-    scene.add(gltf.scene);
-
-    console.log(gltf.scene)
+    // Call the loadAndConvertModel function
+    await loadAndConvertModel(world, scene, gltf, rocketMat, ground);
 
     function animateRocket() {
       if (rocketBody) {
@@ -94,6 +71,42 @@ export async function createRocket(world, scene, camera, renderer, ground) {
     return { animateRocket, rocketBody, rocketGeo };
   } catch (error) {
     console.error('Error loading rocket model:', error);
+    throw error;
+  }
+}
+
+async function loadAndConvertModel(world, scene, gltf, rocketMat, ground) {
+  // Replace 'path/to/your/model.gltf' with the actual path to your glTF file
+  const filePath = '../blender/scene-2.gltf';
+
+  try {
+    // Call the gtlfToCannon function
+    const cannonShapes = await gtlfToCannon(filePath);
+
+    // Log the types of shapes
+    cannonShapes.forEach((shape, index) => {
+      console.log(`Shape ${index + 1}:`, shape.constructor.name);
+    });
+
+    // Assuming there's a single shape in the array
+    const rocketBody = new CANNON.Body({
+      mass: 4,
+      shape: cannonShapes[0],
+      position: new CANNON.Vec3(0, 5, 0),
+      material: rocketMat,
+    });
+
+    world.addBody(rocketBody);
+
+    const groundRocketContactMat = new CANNON.ContactMaterial(
+      ground.material,
+      rocketBody.material
+    );
+    world.addContactMaterial(groundRocketContactMat);
+
+    scene.add(gltf.scene);
+  } catch (error) {
+    console.error('Error loading and converting model:', error);
     throw error;
   }
 }

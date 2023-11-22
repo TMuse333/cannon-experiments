@@ -39,14 +39,11 @@ const createCannonShape = (mesh) => {
     const indices = [];
 
     console.log('Vertices:', vertices);
-    
+    console.log('Indices:', indices);
     for (let i = 0; i < vertices.length / 3; i++) {
       indices.push(i);
     }
-    console.log('Indices:', indices);
-    const shape = new CANNON.ConvexPolyhedron(vertices, indices);
-    console.log('cannon shape',shape)
-    return shape
+    return new CANNON.ConvexPolyhedron(vertices, indices);
   } else {
     // Default to a box shape if the geometry type is not recognized
     console.warn(`Unsupported geometry type: ${geometry.type}. Using BoxGeometry as default.`);

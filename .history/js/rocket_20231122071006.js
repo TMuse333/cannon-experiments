@@ -38,6 +38,7 @@ export async function createRocket(world, scene, camera, renderer, ground) {
   const cylinderHeight = 0.01;
   const cylinderNumSegments = 16;
 
+  const cannonShapes = await gtlfToCannon('../blender/rocketship2.gltf');
 
   const temp = new CANNON.Cylinder(
     cylinderRadiusTop,
@@ -59,8 +60,6 @@ export async function createRocket(world, scene, camera, renderer, ground) {
     });
 
     const rocketMat = new CANNON.Material();
-
-    
 
    const rocketBody = new CANNON.Body({
       mass: 4,

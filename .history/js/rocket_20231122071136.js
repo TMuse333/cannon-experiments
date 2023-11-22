@@ -60,8 +60,6 @@ export async function createRocket(world, scene, camera, renderer, ground) {
 
     const rocketMat = new CANNON.Material();
 
-    
-
    const rocketBody = new CANNON.Body({
       mass: 4,
       shape: temp,

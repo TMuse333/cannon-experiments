@@ -32,21 +32,15 @@ export const gtlfToCannon = async (filePath) => {
 // Function to create a Cannon.js shape from Three.js mesh
 const createCannonShape = (mesh) => {
   const geometry = mesh.geometry;
-  console.log("le geometry",geometry)
+  console.log;
   if (geometry.isBufferGeometry) {
     // Extract vertices and indices from the BufferGeometry
     const vertices = geometry.attributes.position.array;
     const indices = [];
-
-    console.log('Vertices:', vertices);
-    
     for (let i = 0; i < vertices.length / 3; i++) {
       indices.push(i);
     }
-    console.log('Indices:', indices);
-    const shape = new CANNON.ConvexPolyhedron(vertices, indices);
-    console.log('cannon shape',shape)
-    return shape
+    return new CANNON.ConvexPolyhedron(vertices, indices);
   } else {
     // Default to a box shape if the geometry type is not recognized
     console.warn(`Unsupported geometry type: ${geometry.type}. Using BoxGeometry as default.`);

@@ -15,8 +15,6 @@ import { cylinder } from './cylinder.js';
 import {gtlfToCannon} from './gltfToCannon';
 import { cannonShapeToThreeMesh } from './cannonToThree.js';
 
-import { createBase } from './rocketbase.js';
-
 
 
 
@@ -63,7 +61,7 @@ async function loadAndConvertModel() {
       material: rocketMat,
     });
 
-    console.log(rocketBody)
+    console.log(roc)
 
 
 

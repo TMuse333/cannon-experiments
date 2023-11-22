@@ -2,6 +2,7 @@
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import * as CANNON from 'cannon-es';
+import {gtlfToCannon} from './gltfToCannon';
 
 function loadModel(url) {
   return new Promise((resolve, reject) => {
@@ -60,14 +61,60 @@ export async function createRocket(world, scene, camera, renderer, ground) {
 
     const rocketMat = new CANNON.Material();
 
-    
+    async function loadAndConvertModel() {
+        // Replace 'path/to/your/model.gltf' with the actual path to your glTF file
+        const filePath = '../blender/scene-2.gltf';
+      
+        try {
+          // Call the gtlfToCannon function
+          const cannonShapes = await gtlfToCannon(filePath);
+      
+          // Print out the Cannon.js shapes
+          console.log('Cannon.js Shapes:', cannonShapes);
+          const rocketBody = new CANNON.Body({
+            mass: 4,
+            shape: cannonShapes,
+            position: new CANNON.Vec3(0, 5, 0),
+            material: rocketMat,
+          });
 
-   const rocketBody = new CANNON.Body({
-      mass: 4,
-      shape: temp,
-      position: new CANNON.Vec3(0, 5, 0),
-      material: rocketMat,
-    });
+          world.addBody(rocketBody);
+    console.log(rocketBody.material)
+
+    const groundRocketContactMat = new CANNON.ContactMaterial(
+      ground.material,
+      rocketBody.material,
+      
+    );
+    world.addContactMaterial(groundRocketContactMat);
+
+    scene.add(gltf.scene);
+
+    console.log(gltf.scene)
+
+    function animateRocket() {
+      if (rocketBody) {
+        const rocketMesh = gltf.scene.children[0];
+        rocketMesh.position.copy(rocketBody.position);
+        rocketMesh.quaternion.copy(rocketBody.quaternion);
+      }
+    }
+
+    return { animateRocket, rocketBody, rocketGeo };
+  } catch (error) {
+    console.error('Error loading rocket model:', error);
+    throw error;
+  }
+      
+        } catch (error) {
+          console.error('Error loading and converting model:', error);
+        }
+      }
+      
+      // Call the function
+      loadAndConvertModel();
+
+  
 
     world.addBody(rocketBody);
     console.log(rocketBody.material)
