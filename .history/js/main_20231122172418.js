@@ -5,7 +5,6 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import * as CANNON from 'cannon-es';
 import { createGround } from './ground.js';
 import { createRocket } from './rocket.js';
-import { RocketPhysics } from './rocketPhysics.js';
 
 const renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
@@ -60,8 +59,6 @@ console.log(rocketPhysics)
     targetPosition.copy(rocket.object3D.position).add(offset);
     camera.position.lerp(targetPosition, 0.1); // Adjust the lerp factor as needed
     camera.lookAt(rocket.object3D.position);
-
-    rocketPhysics.continuousUpdate();
 
     renderer.render(scene, camera);
   }

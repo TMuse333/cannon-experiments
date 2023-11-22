@@ -76,8 +76,8 @@ export function createRocket(scene, world,ground,renderer,camera) {
         object3D.position.copy(cannonBody.position).add(new THREE.Vector3(0, -0.45, 0));
         object3D.quaternion.copy(cannonBody.quaternion);
 
-        
-       
+
+          
 
       }
 

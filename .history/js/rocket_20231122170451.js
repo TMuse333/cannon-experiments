@@ -76,8 +76,14 @@ export function createRocket(scene, world,ground,renderer,camera) {
         object3D.position.copy(cannonBody.position).add(new THREE.Vector3(0, -0.45, 0));
         object3D.quaternion.copy(cannonBody.quaternion);
 
-        
-       
+
+        const velocity = cannonBody.velocity.norm(); // Get the magnitude of the velocity
+        const threshold = 1; // Adjust this threshold as needed
+      
+        if (velocity > threshold) {
+          console.log('Rocket is in the air!');
+          // Perform actions or trigger events when the rocket is in the air
+        }
 
       }
 

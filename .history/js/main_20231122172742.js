@@ -61,7 +61,7 @@ console.log(rocketPhysics)
     camera.position.lerp(targetPosition, 0.1); // Adjust the lerp factor as needed
     camera.lookAt(rocket.object3D.position);
 
-    rocketPhysics.continuousUpdate();
+    
 
     renderer.render(scene, camera);
   }
