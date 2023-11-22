@@ -134,7 +134,7 @@ function animate() {
 
     // tree.updateTree(positionOffset)
 
-    // base.animateRocket()
+    base.animateRocket()
 
     
     // console.log(rocketBody.position)

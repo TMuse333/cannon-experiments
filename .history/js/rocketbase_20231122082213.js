@@ -6,7 +6,7 @@ export function createBase(scene, world) {
   const group = new THREE.Group();
 
   // Create a taller cylinder
-  const cylinderGeometry = new THREE.CylinderGeometry(1, 1, 5, 32); // Set height to 4
+  const cylinderGeometry = new THREE.CylinderGeometry(1, 1, 4, 32); // Set height to 4
   const cylinderMaterial = new THREE.MeshPhongMaterial({ color: 0x0000ff }); // Set color to blue
   const cylinder = new THREE.Mesh(cylinderGeometry, cylinderMaterial);
   group.add(cylinder);
@@ -25,7 +25,7 @@ group.position.y +=5
 
   const combinedBody = new CANNON.Body({ mass: 1 });
 
-  const cylinderShape = new CANNON.Cylinder(1, 1, 5, 32);
+  const cylinderShape = new CANNON.Cylinder(1, 1, 7, 32);
   const coneShape = new CANNON.Cylinder(0, 1, 2, 32);
   
   // Position the cone on top of the cylinder

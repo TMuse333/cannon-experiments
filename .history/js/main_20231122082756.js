@@ -16,7 +16,7 @@ import {gtlfToCannon} from './gltfToCannon';
 import { cannonShapeToThreeMesh } from './cannonToThree.js';
 
 import { createBase } from './rocketbase.js';
-import { createLeg } from './rocketleg.js';
+import 
 
 
 
@@ -62,9 +62,7 @@ const world = new CANNON.World({
   gravity: new CANNON.Vec3(0, -9.81, 0),
 });
 
-// const base = createBase(scene,world)
-
-createLeg(scene)
+const base = createBase(scene,world)
 
 const ground = createGround(world, scene);
 
@@ -134,7 +132,7 @@ function animate() {
 
     // tree.updateTree(positionOffset)
 
-    // base.animateRocket()
+    base.animateRocket()
 
     
     // console.log(rocketBody.position)

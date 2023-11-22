@@ -62,7 +62,7 @@ const world = new CANNON.World({
   gravity: new CANNON.Vec3(0, -9.81, 0),
 });
 
-// const base = createBase(scene,world)
+const base = createBase(scene,world)
 
 createLeg(scene)
 
@@ -134,7 +134,7 @@ function animate() {
 
     // tree.updateTree(positionOffset)
 
-    // base.animateRocket()
+    base.animateRocket()
 
     
     // console.log(rocketBody.position)
