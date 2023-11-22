@@ -10,7 +10,6 @@ import { createSphere } from './sphere.js';
 import { createGround } from './ground.js';
 import {createTree} from './tree'
 import { createRocket } from './rocket.js';
-import { cylinder } from './cylinder.js';
 
 
 
@@ -58,14 +57,13 @@ const ground = createGround(world, scene);
 
 const sphere = createSphere(world, scene,camera,renderer,ground);
 
-// const cylinder2 =cylinder(scene,world)
+
 
 // const tree = createTree(world,scene)
 
 // const rocket = createRocket(world, scene,camera,renderer,ground)
 
 const { animateRocket, rocketBody, rocketGeo } = await createRocket(world, scene, camera, renderer, ground);
-
 
 
 
@@ -119,7 +117,7 @@ function animate() {
 
   // rocket.animateRocket()
     
-  // cylinder2.animateCylinder()
+
   renderer.render(scene, camera);
 }
 

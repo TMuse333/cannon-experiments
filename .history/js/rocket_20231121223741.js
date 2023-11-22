@@ -69,7 +69,7 @@ export async function createRocket(world, scene, camera, renderer, ground) {
     });
 
     world.addBody(rocketBody);
-    console.log(rocketGeo)
+    console.log(rocket)
 
     const groundRocketContactMat = new CANNON.ContactMaterial(
       ground.material,

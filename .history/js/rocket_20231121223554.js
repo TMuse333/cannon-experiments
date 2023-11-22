@@ -47,7 +47,7 @@ export async function createRocket(world, scene, camera, renderer, ground) {
  
 
   try {
-    const gltf = await loadModel('../blender/scene-2.gltf');
+    const gltf = await loadModel('../blender/scene.gltf');
     
     gltf.scene.position.set(0, 10, 0);
 
@@ -62,14 +62,14 @@ export async function createRocket(world, scene, camera, renderer, ground) {
 
    const rocketBody = new CANNON.Body({
       mass: 4,
-      shape: rocketGeo,
+      shape: temp,
     // shape: new CANNON.Box(new CANNON.Vec3(1, 0.1, 1)),
       position: new CANNON.Vec3(0, 10, 0),
       material: rocketMat,
     });
 
     world.addBody(rocketBody);
-    console.log(rocketGeo)
+    console.log(rocketBody.shape)
 
     const groundRocketContactMat = new CANNON.ContactMaterial(
       ground.material,

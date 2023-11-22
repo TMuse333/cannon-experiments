@@ -10,8 +10,7 @@ import { createSphere } from './sphere.js';
 import { createGround } from './ground.js';
 import {createTree} from './tree'
 import { createRocket } from './rocket.js';
-import { cylinder } from './cylinder.js';
-
+import { Sphere } from 'cannon-es';
 
 
 
@@ -39,6 +38,22 @@ const camera = new THREE.PerspectiveCamera(
   1000
 );
 
+// main.js or another module
+
+// import { loadAndFindShape } from './shape.js';
+
+// const url = '../blender/rocketship2.gltf';
+// loadAndFindShape(url)
+//   .then(geometry => {
+//     console.log(geometry);
+//     // Do something with the geometry
+//   })
+//   .catch(error => {
+//     console.error(error);
+//   });
+
+
+
 
 
 
@@ -58,14 +73,13 @@ const ground = createGround(world, scene);
 
 const sphere = createSphere(world, scene,camera,renderer,ground);
 
-// const cylinder2 =cylinder(scene,world)
+
 
 // const tree = createTree(world,scene)
 
 // const rocket = createRocket(world, scene,camera,renderer,ground)
 
 const { animateRocket, rocketBody, rocketGeo } = await createRocket(world, scene, camera, renderer, ground);
-
 
 
 
@@ -96,7 +110,7 @@ const positionOffset = new THREE.Vector3(-10, 2.5, 0);
 
 const timeStep = 1 / 60;
 
-// cylinder(scene)
+sphere(scene)
 
 function animate() {
   world.step(timeStep);
@@ -119,7 +133,7 @@ function animate() {
 
   // rocket.animateRocket()
     
-  // cylinder2.animateCylinder()
+
   renderer.render(scene, camera);
 }
 

@@ -68,7 +68,6 @@ const { animateRocket, rocketBody, rocketGeo } = await createRocket(world, scene
 
 
 
-
 // const rocket = createRocket(scene,world)
 
 

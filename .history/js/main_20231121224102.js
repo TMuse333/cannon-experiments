@@ -66,7 +66,7 @@ const sphere = createSphere(world, scene,camera,renderer,ground);
 
 const { animateRocket, rocketBody, rocketGeo } = await createRocket(world, scene, camera, renderer, ground);
 
-
+console.log(rocketBody)
 
 
 // const rocket = createRocket(scene,world)

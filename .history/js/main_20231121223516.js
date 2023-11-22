@@ -68,7 +68,6 @@ const { animateRocket, rocketBody, rocketGeo } = await createRocket(world, scene
 
 
 
-
 // const rocket = createRocket(scene,world)
 
 
@@ -119,7 +118,7 @@ function animate() {
 
   // rocket.animateRocket()
     
-  // cylinder2.animateCylinder()
+  cylinder2.animateCylinder()
   renderer.render(scene, camera);
 }
 

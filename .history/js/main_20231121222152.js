@@ -39,7 +39,7 @@ const camera = new THREE.PerspectiveCamera(
   1000
 );
 
-
+cy
 
 
 const orbit = new OrbitControls(camera, renderer.domElement);
@@ -58,14 +58,13 @@ const ground = createGround(world, scene);
 
 const sphere = createSphere(world, scene,camera,renderer,ground);
 
-// const cylinder2 =cylinder(scene,world)
+
 
 // const tree = createTree(world,scene)
 
 // const rocket = createRocket(world, scene,camera,renderer,ground)
 
 const { animateRocket, rocketBody, rocketGeo } = await createRocket(world, scene, camera, renderer, ground);
-
 
 
 
@@ -119,7 +118,7 @@ function animate() {
 
   // rocket.animateRocket()
     
-  // cylinder2.animateCylinder()
+
   renderer.render(scene, camera);
 }
 
