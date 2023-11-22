@@ -6,7 +6,7 @@ import { threeToCannon, ShapeType } from 'three-to-cannon';
 import * as CANNON from 'cannon-es';
 import {createRaycaster} from './raycaster'
 
-export function createRocket(scene, world,ground,renderer,camera) {
+export function createRocket(scene, world,ground) {
   const gltfPath = '../blender/scene-2.gltf';
   const gltfLoader = new GLTFLoader();
 
@@ -40,8 +40,8 @@ export function createRocket(scene, world,ground,renderer,camera) {
           {
             friction: 0.5,
             restitution: 0.3,
-            // contactEquationRelaxation: 3, // Adjust as needed
-            // contactEquationStiffness: 1e6 // Adjust as needed
+            contactEquationRelaxation: 3, // Adjust as needed
+            contactEquationStiffness: 1e6 // Adjust as needed
           }
         );
         
@@ -55,22 +55,13 @@ export function createRocket(scene, world,ground,renderer,camera) {
   const cleanupRaycaster = createRaycaster(camera, scene, renderer, objectsToInteract, onRocketClick);
 
   function onRocketClick(clickedObject) {
-    console.log('rocket clicked!', clickedObject.name);
-  
-    // Traverse up the hierarchy to find the top-level object3D
-    let topObject = clickedObject;
-    while (topObject.parent !== null && topObject.parent !== scene) {
-      topObject = topObject.parent;
-    }
-  
-    if (topObject === object3D) {
-      console.log('Applying impulse to rocket');
-      const impulse = new CANNON.Vec3(0, 100, 0);
-      const impulsePoint = new CANNON.Vec3();
-      cannonBody.applyImpulse(impulse, impulsePoint);
+    console.log('rocket clicked!');
+
+    if (clickedObject === sphereMesh) {
+      // Apply an impulse to the sphere in the y-direction
+      object3D.applyImpulse(new CANNON.Vec3(0, 5, 0), cannonBody.position);
     }
   }
-  
 
       function animateRocket() {
         object3D.position.copy(cannonBody.position).add(new THREE.Vector3(0, -0.45, 0));

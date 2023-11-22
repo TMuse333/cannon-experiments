@@ -55,22 +55,17 @@ export function createRocket(scene, world,ground,renderer,camera) {
   const cleanupRaycaster = createRaycaster(camera, scene, renderer, objectsToInteract, onRocketClick);
 
   function onRocketClick(clickedObject) {
-    console.log('rocket clicked!', clickedObject.name);
+    console.log('rocket clicked!', clickedObject === object3D);
+    console.log(clickedObject)
   
-    // Traverse up the hierarchy to find the top-level object3D
-    let topObject = clickedObject;
-    while (topObject.parent !== null && topObject.parent !== scene) {
-      topObject = topObject.parent;
-    }
-  
-    if (topObject === object3D) {
+    if (clickedObject === object3D)
+     {
       console.log('Applying impulse to rocket');
       const impulse = new CANNON.Vec3(0, 100, 0);
       const impulsePoint = new CANNON.Vec3();
       cannonBody.applyImpulse(impulse, impulsePoint);
     }
   }
-  
 
       function animateRocket() {
         object3D.position.copy(cannonBody.position).add(new THREE.Vector3(0, -0.45, 0));

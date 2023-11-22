@@ -37,7 +37,7 @@ const ground = createGround(world, scene);
 // ... (previous code)
 
 // Use a promise to ensure the rocket is fully loaded
-createRocket(scene, world,ground,renderer,camera).then((rocket) => {
+createRocket(scene, world,ground).then((rocket) => {
   const timeStep = 1 / 60;
 
   function animate() {
