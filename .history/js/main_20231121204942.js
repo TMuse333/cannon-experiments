@@ -86,8 +86,6 @@ const rocket = createRocket(scene,world)
 
 
 
-
-
 console.log(rocket)
 
 // const groundRocketContactMat = new CANNON.ContactMaterial(

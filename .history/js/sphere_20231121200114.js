@@ -23,7 +23,7 @@ export function createSphere(world, scene, camera, renderer, ground) {
 
   const sphereMesh = createSphereMesh();
   scene.add(sphereMesh);
-  console.log(sphereMesh)
+  console.log(shpere)
 
   const groundSphereContactMat = new CANNON.ContactMaterial(
     ground.material,

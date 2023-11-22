@@ -82,13 +82,9 @@ const tree = createTree(world,scene)
 
 
 
-const rocket = createRocket(scene,world)
+const {rocket} = createRocket(scene,world)
 
-
-
-
-
-console.log(rocket)
+// console.log(rocket)
 
 // const groundRocketContactMat = new CANNON.ContactMaterial(
 //   ground.material,
@@ -108,8 +104,6 @@ const timeStep = 1 / 60;
 
 function animate() {
   world.step(timeStep);
-
- 
 
   ground.mesh.position.copy(ground.body.position);
   ground.mesh.quaternion.copy(ground.body.quaternion);

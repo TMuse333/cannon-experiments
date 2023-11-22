@@ -82,13 +82,11 @@ const tree = createTree(world,scene)
 
 
 
-const rocket = createRocket(scene,world)
+const rocket = cre
 
 
 
-
-
-console.log(rocket)
+// console.log(rocket)
 
 // const groundRocketContactMat = new CANNON.ContactMaterial(
 //   ground.material,

@@ -2,7 +2,7 @@ import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import * as CANNON from 'cannon-es';
 
-export function createRocket(scene,world) {
+export function createRocket(scene) {
     const loader = new GLTFLoader();
 
     loader.load('../blender/scene-2.gltf', (gltf) => {
@@ -23,7 +23,7 @@ export function createRocket(scene,world) {
         console.log(rocket)
 
 
-return rocket
+
         
     });
 }

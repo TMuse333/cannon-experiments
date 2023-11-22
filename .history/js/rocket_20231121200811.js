@@ -2,7 +2,7 @@ import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import * as CANNON from 'cannon-es';
 
-export function createRocket(scene,world) {
+export function createRocket(scene) {
     const loader = new GLTFLoader();
 
     loader.load('../blender/scene-2.gltf', (gltf) => {
@@ -12,7 +12,14 @@ export function createRocket(scene,world) {
         rocket.rotation.set(0, 0, 0);
         rocket.scale.set(1, 1, 1);
 
-       
+        const rocketObject = rocket.getObjectByName('Scene');
+
+        // Get the geometry directly
+        const rocketGeometry = rocketObject.geometry;
+
+        console.log(rocketGeometry)
+
+  console.log("lol")
 
        
         // const cannonShape = convertGeometryToCannonShape(rocketGeometry);
@@ -20,13 +27,11 @@ export function createRocket(scene,world) {
         // Add the rocket to the scene
         scene.add(rocket);
 
-        console.log(rocket)
+        console.log(rocket.child)
 
-
-return rocket
         
     });
 }
 
 
-
+}

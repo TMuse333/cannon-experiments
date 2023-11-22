@@ -23,7 +23,9 @@ export function createRocket(scene,world) {
         console.log(rocket)
 
 
-return rocket
+return {
+    rocket: rocket
+}
         
     });
 }

@@ -18,7 +18,7 @@ export function createRocket(scene,world) {
         // const cannonShape = convertGeometryToCannonShape(rocketGeometry);
 
         // Add the rocket to the scene
-        scene.add(rocket);
+        
 
         console.log(rocket)
 

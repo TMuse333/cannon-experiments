@@ -82,13 +82,18 @@ const tree = createTree(world,scene)
 
 
 
-const rocket = createRocket(scene,world)
+const rocketPromise = createRocket(scene, world);
 
-
-
-
+rocketPromise.then(rocket => {
+    console.log("Rocket loaded:", rocket);
+    // Now you can use the rocket object
+}).catch(error => {
+    console.error("Error loading rocket:", error);
+});
 
 console.log(rocket)
+
+// console.log(rocket)
 
 // const groundRocketContactMat = new CANNON.ContactMaterial(
 //   ground.material,

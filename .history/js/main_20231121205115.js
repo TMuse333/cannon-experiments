@@ -84,7 +84,7 @@ const tree = createTree(world,scene)
 
 const rocket = createRocket(scene,world)
 
-
+scene.add(rocket);
 
 
 
