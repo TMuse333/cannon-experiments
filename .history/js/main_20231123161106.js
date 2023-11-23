@@ -75,7 +75,12 @@ console.log("test")
 
     rocketPhysics.continuousUpdate();
 
-
+    updateDashboard({
+      throttle: rocketPhysics.throttleValue,
+      thrust: rocketPhysics.thrustValue,
+      altitude: rocket.cannonBody.position.y.toFixed(2),
+      // Add more parameters as needed
+  });
 
     renderer.render(scene, camera);
   }

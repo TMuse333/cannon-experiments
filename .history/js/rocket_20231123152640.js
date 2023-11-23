@@ -6,7 +6,6 @@ import { threeToCannon, ShapeType } from 'three-to-cannon';
 import * as CANNON from 'cannon-es';
 import {createRaycaster} from './raycaster'
 import { rocketLaunch } from './rocketPhysics';
-import { controlRocket } from './rocketPhysics';
 
 export function createRocket(scene, world,ground,renderer,camera) {
   const gltfPath = '../blender/scene-2.gltf';
@@ -35,7 +34,7 @@ export function createRocket(scene, world,ground,renderer,camera) {
       object3D.userData.clickable = true;
 
 
-      document.addEventListener('keydown', (event) => controlRocket(event, cannonBody));
+      
 
   // Set up the raycaster for the sphere
   const objectsToInteract = [object3D];

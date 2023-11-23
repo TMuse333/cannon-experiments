@@ -4,7 +4,7 @@ import * as THREE from 'three';
 import * as CANNON from 'cannon-es';
 
 export class RocketPhysics {
-  constructor(object3D, cannonBody, scene, world,ground) {
+  constructor(object3D, cannonBody, scene, world,ground,updateDashboard) {
     this.object3D = object3D;
     this.cannonBody = cannonBody;
     this.scene = scene;
@@ -20,7 +20,7 @@ export class RocketPhysics {
     this.previousFlights = []; // Initialize the array for storing previous flights
     this.initFlightTimeDisplay();
 
-   
+    this.updateDashboard = updateDashboard;
 
 
 

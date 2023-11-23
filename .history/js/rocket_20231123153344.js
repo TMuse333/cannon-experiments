@@ -35,7 +35,7 @@ export function createRocket(scene, world,ground,renderer,camera) {
       object3D.userData.clickable = true;
 
 
-      document.addEventListener('keydown', (event) => controlRocket(event, cannonBody));
+      document.addEventListener('keydown',controlRocket(cannonBody))
 
   // Set up the raycaster for the sphere
   const objectsToInteract = [object3D];

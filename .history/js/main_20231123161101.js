@@ -52,7 +52,7 @@ console.log("test")
 
   const rocketPhysics = new RocketPhysics(rocket.object3D, rocket.cannonBody, scene, world,ground);
 
-
+console.log(rocketPhysics)
 
   const timeStep = 1 / 60;
 
@@ -75,7 +75,12 @@ console.log("test")
 
     rocketPhysics.continuousUpdate();
 
-
+    updateDashboard({
+      throttle: rocketPhysics.throttleValue,
+      thrust: rocketPhysics.thrustValue,
+      altitude: rocket.cannonBody.position.y.toFixed(2),
+      // Add more parameters as needed
+  });
 
     renderer.render(scene, camera);
   }

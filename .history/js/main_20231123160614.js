@@ -7,7 +7,6 @@ import { createGround } from './ground.js';
 import { createRocket } from './rocket.js';
 import { RocketPhysics } from './rocketPhysics.js';
 
-
 const renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
@@ -40,11 +39,6 @@ const ground = createGround(world, scene);
 
 
 
-// Function to update the dashboard
-
-
-
-
 // Use a promise to ensure the rocket is fully loaded
 createRocket(scene, world,ground,renderer,camera).then((rocket) => {
 
@@ -52,7 +46,7 @@ console.log("test")
 
   const rocketPhysics = new RocketPhysics(rocket.object3D, rocket.cannonBody, scene, world,ground);
 
-
+console.log(rocketPhysics)
 
   const timeStep = 1 / 60;
 
@@ -74,8 +68,6 @@ console.log("test")
     camera.lookAt(rocket.object3D.position);
 
     rocketPhysics.continuousUpdate();
-
-
 
     renderer.render(scene, camera);
   }

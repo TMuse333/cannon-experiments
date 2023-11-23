@@ -20,8 +20,6 @@ export class RocketPhysics {
     this.previousFlights = []; // Initialize the array for storing previous flights
     this.initFlightTimeDisplay();
 
-   
-
 
 
   }
@@ -116,8 +114,6 @@ export class RocketPhysics {
     if (this.object3D && this.cannonBody) {
       this.positionDisplay.textContent = `Rocket Position (x, y, z): ${this.cannonBody.position.x.toFixed(2)}, ${this.cannonBody.position.y.toFixed(2)}, ${this.cannonBody.position.z.toFixed(2)}`;
       this.velocityDisplay.textContent = `Rocket Velocity (x, y, z): ${this.cannonBody.velocity.x.toFixed(2)}, ${this.cannonBody.velocity.y.toFixed(2)}, ${this.cannonBody.velocity.z.toFixed(2)}`;
-
-      
   
       if (this.cannonBody.position.y < 4) {
         if (!this.isOnGround) {
@@ -162,7 +158,7 @@ export class RocketPhysics {
 export function controlRocket(event,cannonBody) {
   if(event.key === 'w'){
     console.log("going up!")
-    const takeoffImpulse = new CANNON.Vec3(0, 10, 0);
+    const takeoffImpulse = new CANNON.Vec3(0, 10w, 0);
     const impulsePoint = new CANNON.Vec3();
     cannonBody.applyImpulse(takeoffImpulse, impulsePoint);
   }

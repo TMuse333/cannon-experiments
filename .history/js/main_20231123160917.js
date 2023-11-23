@@ -6,7 +6,7 @@ import * as CANNON from 'cannon-es';
 import { createGround } from './ground.js';
 import { createRocket } from './rocket.js';
 import { RocketPhysics } from './rocketPhysics.js';
-
+import 
 
 const renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
@@ -36,12 +36,26 @@ const ground = createGround(world, scene);
 
 
 
+const rocketDashboardElement = document.createElement('div');
+rocketDashboardElement.style.position = 'absolute';
+rocketDashboardElement.style.top = '10px';
+rocketDashboardElement.style.left = '10px';
+document.body.appendChild(rocketDashboardElement);
 
-
-
+// Load the dashboard HTML file into the rocketDashboardElement
+rocketDashboardElement.innerHTML = '...';  // Load the contents of dashboard.html here
 
 // Function to update the dashboard
-
+function updateDashboard({ throttle, thrust, altitude }) {
+    // Update the dashboard elements with new values
+    // Example: document.getElementById('throttleValue').innerText = `Throttle: ${throttle}`;
+    rocketDashboardElement.innerHTML = `
+        <p>Throttle: ${throttle}</p>
+        <p>Thrust: ${thrust}</p>
+        <p>Altitude: ${altitude}</p>
+        <!-- Add more parameters as needed -->
+    `;
+}
 
 
 
@@ -50,9 +64,9 @@ createRocket(scene, world,ground,renderer,camera).then((rocket) => {
 
 console.log("test")
 
-  const rocketPhysics = new RocketPhysics(rocket.object3D, rocket.cannonBody, scene, world,ground);
+  const rocketPhysics = new RocketPhysics(rocket.object3D, rocket.cannonBody, scene, world,ground,updateDashboard);
 
-
+console.log(rocketPhysics)
 
   const timeStep = 1 / 60;
 
@@ -75,7 +89,12 @@ console.log("test")
 
     rocketPhysics.continuousUpdate();
 
-
+    updateDashboard({
+      throttle: rocketPhysics.throttleValue,
+      thrust: rocketPhysics.thrustValue,
+      altitude: rocket.cannonBody.position.y.toFixed(2),
+      // Add more parameters as needed
+  });
 
     renderer.render(scene, camera);
   }

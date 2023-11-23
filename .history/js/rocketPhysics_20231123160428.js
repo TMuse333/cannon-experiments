@@ -4,7 +4,7 @@ import * as THREE from 'three';
 import * as CANNON from 'cannon-es';
 
 export class RocketPhysics {
-  constructor(object3D, cannonBody, scene, world,ground) {
+  constructor(object3D, cannonBody, scene, world,ground,updateDashboard) {
     this.object3D = object3D;
     this.cannonBody = cannonBody;
     this.scene = scene;
@@ -20,7 +20,7 @@ export class RocketPhysics {
     this.previousFlights = []; // Initialize the array for storing previous flights
     this.initFlightTimeDisplay();
 
-   
+    this.updateDashboard = updateDashboard;
 
 
 
@@ -116,8 +116,6 @@ export class RocketPhysics {
     if (this.object3D && this.cannonBody) {
       this.positionDisplay.textContent = `Rocket Position (x, y, z): ${this.cannonBody.position.x.toFixed(2)}, ${this.cannonBody.position.y.toFixed(2)}, ${this.cannonBody.position.z.toFixed(2)}`;
       this.velocityDisplay.textContent = `Rocket Velocity (x, y, z): ${this.cannonBody.velocity.x.toFixed(2)}, ${this.cannonBody.velocity.y.toFixed(2)}, ${this.cannonBody.velocity.z.toFixed(2)}`;
-
-      
   
       if (this.cannonBody.position.y < 4) {
         if (!this.isOnGround) {
