@@ -31,6 +31,23 @@ export function createRocket(scene, world,ground,renderer,camera) {
       world.addBody(cannonBody);
 
 
+    //   const cannonMaterial = new CANNON.Material();
+    //   cannonBody.material = cannonMaterial;
+
+    //  const groundRocketContact = new CANNON.ContactMaterial(
+    //   ground.material,
+    //   cannonMaterial,
+    //   {
+    //     friction: 0.5,
+    //     restitution: 0.4,
+       
+    //   }
+    // );
+      
+    //     world.addContactMaterial(groundRocketContact);
+   
+
+
       object3D.userData.clickable = true;
 
   // Set up the raycaster for the sphere

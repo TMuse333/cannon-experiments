@@ -38,9 +38,9 @@ const ground = createGround(world, scene);
 // Use a promise to ensure the rocket is fully loaded
 createRocket(scene, world,ground,renderer,camera).then((rocket) => {
 
-console.log("test")
+console.log("test",can)
 
-  const rocketPhysics = new RocketPhysics(rocket.object3D, rocket.cannonBody, scene, world,ground);
+  const rocketPhysics = new RocketPhysics(rocket.object3D, rocket.cannonBody, scene, world);
 
 console.log(rocketPhysics)
 

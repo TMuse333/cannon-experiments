@@ -17,15 +17,7 @@ export class RocketPhysics {
     this.initFlightTimeDisplay();
     this.setupGroundRocketContact(ground);
 
-    this.previousFlights = []; // Initialize the array for storing previous flights
-    this.initFlightTimeDisplay();
-
-
-
   }
-
-
-
 
   setupGroundRocketContact(ground) {
     // Create a material for the cannon body
@@ -109,25 +101,21 @@ export class RocketPhysics {
 
 
   continuousUpdate() {
-    const deltaTime = 1 / 60;
-  
+
+    const deltaTime = 1/60;
+    // Continuously update the position of the rocket in the x, y, and z planes
     if (this.object3D && this.cannonBody) {
+      const deltaTime = 1 / 60; // Assuming 60 frames per second, adjust as needed
+
       this.positionDisplay.textContent = `Rocket Position (x, y, z): ${this.cannonBody.position.x.toFixed(2)}, ${this.cannonBody.position.y.toFixed(2)}, ${this.cannonBody.position.z.toFixed(2)}`;
+
       this.velocityDisplay.textContent = `Rocket Velocity (x, y, z): ${this.cannonBody.velocity.x.toFixed(2)}, ${this.cannonBody.velocity.y.toFixed(2)}, ${this.cannonBody.velocity.z.toFixed(2)}`;
-  
+
+
       if (this.cannonBody.position.y < 4) {
         if (!this.isOnGround) {
           this.isOnGround = true;
           console.log('Rocket is on the ground.');
-  
-          // Store the previous flight data and reset the timer
-          if (this.timeInAir > 0) {
-            this.previousFlights.push({
-              flightTime: this.timeInAir,
-              // Add any other relevant data you want to store
-            });
-          }
-          this.timeInAir = 0;
         }
       } else {
         // Rocket is in the air
@@ -135,19 +123,16 @@ export class RocketPhysics {
           this.isOnGround = false;
           console.log('Rocket has taken off.');
         }
-  
+
         // Track the time in the air
         this.timeInAir += deltaTime;
       }
-  
+
       // Display flight time
       this.flightTimeDisplay.textContent = `Flight Time: ${this.timeInAir.toFixed(2)} seconds`;
-  
-      // Display previous flight data (for demonstration purposes)
-     
+    
     }
   }
-  
 
  
 
@@ -158,7 +143,7 @@ export class RocketPhysics {
 
 export function rocketLaunch(cannonBody) {
   const takeoffImpulse = new CANNON.Vec3(0, 100, 0);
-  const landingImpulse = new CANNON.Vec3(0, 40, 0); // Adjust the values as needed
+  const landingImpulse = new CANNON.Vec3(0, 10, 0); // Adjust the values as needed
   const impulsePoint = new CANNON.Vec3();
 
   // Apply the initial takeoff impulse
@@ -177,6 +162,6 @@ export function rocketLaunch(cannonBody) {
     // Increase damping for controlled landing
     cannonBody.linearDamping = 0.5;
     cannonBody.angularDamping = 0.5;
-  }, 3500); // Adjust the time as needed
+  }, 1000); // Adjust the time as needed
 }
 

@@ -5,7 +5,6 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader';
 import { threeToCannon, ShapeType } from 'three-to-cannon';
 import * as CANNON from 'cannon-es';
 import {createRaycaster} from './raycaster'
-import { rocketLaunch } from './rocketPhysics';
 
 export function createRocket(scene, world,ground,renderer,camera) {
   const gltfPath = '../blender/scene-2.gltf';
@@ -30,6 +29,24 @@ export function createRocket(scene, world,ground,renderer,camera) {
 
       world.addBody(cannonBody);
 
+      if (ground && ground.material) {
+        // Create a material for the cannon body
+        const cannonMaterial = new CANNON.Material();
+        cannonBody.material = cannonMaterial;
+
+        const groundRocketContact = new CANNON.ContactMaterial(
+          ground.material,
+          cannonMaterial,
+          {
+            friction: 0.5,
+            restitution: 0.3,
+            // contactEquationRelaxation: 3, // Adjust as needed
+            // contactEquationStiffness: 1e6 // Adjust as needed
+          }
+        );
+        
+        world.addContactMaterial(groundRocketContact);
+      }
 
       object3D.userData.clickable = true;
 
@@ -48,7 +65,7 @@ export function createRocket(scene, world,ground,renderer,camera) {
   
     if (topObject === object3D) {
       console.log('Applying impulse to rocket');
-    rocketLaunch(cannonBody)
+    rocketLaunch()
     }
   }
   
@@ -56,7 +73,7 @@ export function createRocket(scene, world,ground,renderer,camera) {
       function animateRocket() {
         object3D.position.copy(cannonBody.position).add(new THREE.Vector3(0, -0.45, 0));
         object3D.quaternion.copy(cannonBody.quaternion);
-        
+
         
        
 

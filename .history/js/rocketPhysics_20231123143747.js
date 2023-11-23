@@ -20,12 +20,33 @@ export class RocketPhysics {
     this.previousFlights = []; // Initialize the array for storing previous flights
     this.initFlightTimeDisplay();
 
-
+    world.addEventListener('beginContact', this.onBeginContact.bind(this));
 
   }
 
 
 
+  onBeginContact(event) {
+    // Check if the contact involves the rocket and the groundRocketContact material
+    const contact = event.contact;
+    const groundRocketContactMaterial = this.groundRocketContact.materials[0]
+
+    if (
+      (contact.bi === this.cannonBody && contact.bj.material === groundRocketContactMaterial) ||
+      (contact.bi.material === groundRocketContactMaterial && contact.bj === this.cannonBody)
+    ) {
+      console.log('Rocket hit the ground.');
+
+      // Store the previous flight data and reset the timer
+      if (this.timeInAir > 0) {
+        this.previousFlights.push({
+          flightTime: this.timeInAir,
+          // Add any other relevant data you want to store
+        });
+      }
+      this.timeInAir = 0;
+    }
+  }
 
   setupGroundRocketContact(ground) {
     // Create a material for the cannon body
@@ -158,7 +179,7 @@ export class RocketPhysics {
 
 export function rocketLaunch(cannonBody) {
   const takeoffImpulse = new CANNON.Vec3(0, 100, 0);
-  const landingImpulse = new CANNON.Vec3(0, 40, 0); // Adjust the values as needed
+  const landingImpulse = new CANNON.Vec3(0, 10, 0); // Adjust the values as needed
   const impulsePoint = new CANNON.Vec3();
 
   // Apply the initial takeoff impulse
@@ -177,6 +198,6 @@ export function rocketLaunch(cannonBody) {
     // Increase damping for controlled landing
     cannonBody.linearDamping = 0.5;
     cannonBody.angularDamping = 0.5;
-  }, 3500); // Adjust the time as needed
+  }, 1000); // Adjust the time as needed
 }
 

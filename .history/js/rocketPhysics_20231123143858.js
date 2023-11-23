@@ -177,6 +177,6 @@ export function rocketLaunch(cannonBody) {
     // Increase damping for controlled landing
     cannonBody.linearDamping = 0.5;
     cannonBody.angularDamping = 0.5;
-  }, 3500); // Adjust the time as needed
+  }, 1000); // Adjust the time as needed
 }
 

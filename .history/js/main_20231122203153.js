@@ -38,9 +38,7 @@ const ground = createGround(world, scene);
 // Use a promise to ensure the rocket is fully loaded
 createRocket(scene, world,ground,renderer,camera).then((rocket) => {
 
-console.log("test")
-
-  const rocketPhysics = new RocketPhysics(rocket.object3D, rocket.cannonBody, scene, world,ground);
+  const rocketPhysics = new RocketPhysics(rocket.object3D, rocket.cannonBody, scene, world);
 
 console.log(rocketPhysics)
 
@@ -58,7 +56,7 @@ console.log(rocketPhysics)
       rocket.object3D.quaternion.copy(rocket.cannonBody.quaternion);
     }
 
-    const offset = new THREE.Vector3(0, 5, -25); // Adjust the offset as needed
+    const offset = new THREE.Vector3(0, 5, -15); // Adjust the offset as needed
     targetPosition.copy(rocket.object3D.position).add(offset);
     camera.position.lerp(targetPosition, 0.1); // Adjust the lerp factor as needed
     camera.lookAt(rocket.object3D.position);

@@ -6,6 +6,7 @@ import { threeToCannon, ShapeType } from 'three-to-cannon';
 import * as CANNON from 'cannon-es';
 import {createRaycaster} from './raycaster'
 import { rocketLaunch } from './rocketPhysics';
+import g
 
 export function createRocket(scene, world,ground,renderer,camera) {
   const gltfPath = '../blender/scene-2.gltf';
@@ -30,6 +31,15 @@ export function createRocket(scene, world,ground,renderer,camera) {
 
       world.addBody(cannonBody);
 
+      if (ground && ground.material) {
+        // Create a material for the cannon body
+        const cannonMaterial = new CANNON.Material();
+        cannonBody.material = cannonMaterial;
+
+       
+        
+        world.addContactMaterial(groundRocketContact);
+      }
 
       object3D.userData.clickable = true;
 

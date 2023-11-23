@@ -31,6 +31,7 @@ export function createRocket(scene, world,ground,renderer,camera) {
       world.addBody(cannonBody);
 
 
+
       object3D.userData.clickable = true;
 
   // Set up the raycaster for the sphere

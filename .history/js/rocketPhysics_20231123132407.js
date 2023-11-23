@@ -4,7 +4,7 @@ import * as THREE from 'three';
 import * as CANNON from 'cannon-es';
 
 export class RocketPhysics {
-  constructor(object3D, cannonBody, scene, world,ground) {
+  constructor(object3D, cannonBody, scene, world) {
     this.object3D = object3D;
     this.cannonBody = cannonBody;
     this.scene = scene;
@@ -12,38 +12,6 @@ export class RocketPhysics {
     this.targetPosition = new THREE.Vector3();
     this.offset = new THREE.Vector3(0, 5, -10);
     this.initPositionDisplay();
-    this.isOnGround = false;
-    this.timeInAir = 0;
-    this.initFlightTimeDisplay();
-    this.setupGroundRocketContact(ground);
-
-    this.previousFlights = []; // Initialize the array for storing previous flights
-    this.initFlightTimeDisplay();
-
-
-
-  }
-
-
-
-
-  setupGroundRocketContact(ground) {
-    // Create a material for the cannon body
-    const cannonMaterial = new CANNON.Material();
-    this.cannonBody.material = cannonMaterial;
-
-    // Create the contact material using the ground material and the cannon material
-    const groundRocketContact = new CANNON.ContactMaterial(
-      ground.material,
-      cannonMaterial,
-      {
-        friction: 0.5,
-        restitution: 0,
-      }
-    );
-
-    // Add the contact material to the world
-    this.world.addContactMaterial(groundRocketContact);
   }
   
   initFlightTimeDisplay() {
@@ -67,23 +35,18 @@ export class RocketPhysics {
   initPositionDisplay() {
     // Create a DOM element for position display
     this.positionContainer = document.createElement('div');
-
   this.positionContainer.style.position = 'absolute';
   this.positionContainer.style.bottom = '100px';
   this.positionContainer.style.right = '10px';
-
   this.positionContainer.style.color = 'white';
   this.positionContainer.style.backgroundColor = 'red';
-
   this.positionContainer.style.padding = '10px';
   this.positionContainer.style.width = '200px';
-
   document.body.appendChild(this.positionContainer);
 
   // Create separate elements for position and velocity
   this.positionDisplay = document.createElement('div');
   this.velocityDisplay = document.createElement('div');
-
   this.positionContainer.appendChild(this.positionDisplay);
   this.positionContainer.appendChild(this.velocityDisplay);
   }
@@ -109,45 +72,21 @@ export class RocketPhysics {
 
 
   continuousUpdate() {
-    const deltaTime = 1 / 60;
-  
+
+    const deltaTime = 1/60;
+    // Continuously update the position of the rocket in the x, y, and z planes
     if (this.object3D && this.cannonBody) {
+      const deltaTime = 1 / 60; // Assuming 60 frames per second, adjust as needed
+
       this.positionDisplay.textContent = `Rocket Position (x, y, z): ${this.cannonBody.position.x.toFixed(2)}, ${this.cannonBody.position.y.toFixed(2)}, ${this.cannonBody.position.z.toFixed(2)}`;
+
       this.velocityDisplay.textContent = `Rocket Velocity (x, y, z): ${this.cannonBody.velocity.x.toFixed(2)}, ${this.cannonBody.velocity.y.toFixed(2)}, ${this.cannonBody.velocity.z.toFixed(2)}`;
-  
-      if (this.cannonBody.position.y < 4) {
-        if (!this.isOnGround) {
-          this.isOnGround = true;
-          console.log('Rocket is on the ground.');
-  
-          // Store the previous flight data and reset the timer
-          if (this.timeInAir > 0) {
-            this.previousFlights.push({
-              flightTime: this.timeInAir,
-              // Add any other relevant data you want to store
-            });
-          }
-          this.timeInAir = 0;
-        }
-      } else {
-        // Rocket is in the air
-        if (this.isOnGround) {
-          this.isOnGround = false;
-          console.log('Rocket has taken off.');
-        }
-  
-        // Track the time in the air
-        this.timeInAir += deltaTime;
-      }
-  
-      // Display flight time
-      this.flightTimeDisplay.textContent = `Flight Time: ${this.timeInAir.toFixed(2)} seconds`;
-  
-      // Display previous flight data (for demonstration purposes)
-     
+
+
+    //   console.log('Rocket Position (x, y, z):', this.cannonBody.position.x, this.cannonBody.position.y, this.cannonBody.position.z);
+    
     }
   }
-  
 
  
 
@@ -156,27 +95,8 @@ export class RocketPhysics {
 }
 
 
-export function rocketLaunch(cannonBody) {
-  const takeoffImpulse = new CANNON.Vec3(0, 100, 0);
-  const landingImpulse = new CANNON.Vec3(0, 40, 0); // Adjust the values as needed
+export function  rocketLaunch(cannonBody) {
+  const impulse = new CANNON.Vec3(0, 100, 0);
   const impulsePoint = new CANNON.Vec3();
-
-  // Apply the initial takeoff impulse
-  cannonBody.applyImpulse(takeoffImpulse, impulsePoint);
-
-  // Add damping to simulate controlled descent
-  // You can experiment with different damping values
-  cannonBody.linearDamping = 0.1;
-  cannonBody.angularDamping = 0.1;
-
-  // After a certain time or condition, switch to landing impulse
-  setTimeout(() => {
-    // Apply the landing impulse
-    cannonBody.applyImpulse(landingImpulse, impulsePoint);
-
-    // Increase damping for controlled landing
-    cannonBody.linearDamping = 0.5;
-    cannonBody.angularDamping = 0.5;
-  }, 3500); // Adjust the time as needed
+  cannonBody.applyImpulse(impulse, impulsePoint);
 }
-

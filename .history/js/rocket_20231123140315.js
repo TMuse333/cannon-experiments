@@ -30,6 +30,26 @@ export function createRocket(scene, world,ground,renderer,camera) {
 
       world.addBody(cannonBody);
 
+      const cannonMaterial = new CANNON.Material();
+      cannonBody.material = cannonMaterial;
+
+     const groundRocketContact = new CANNON.ContactMaterial(
+      ground.material,
+      cannonMaterial,
+      {
+        friction: 0.5,
+        restitution: 0.3,
+       
+      }
+    );
+      
+
+      if (ground && ground.material) {
+        // Create a material for the cannon body
+      
+        world.addContactMaterial(groundRocketContact);
+      // }
+
 
       object3D.userData.clickable = true;
 

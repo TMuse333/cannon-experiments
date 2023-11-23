@@ -40,7 +40,7 @@ createRocket(scene, world,ground,renderer,camera).then((rocket) => {
 
 console.log("test")
 
-  const rocketPhysics = new RocketPhysics(rocket.object3D, rocket.cannonBody, scene, world,ground);
+  const rocketPhysics = new RocketPhysics(rocket.object3D, rocket.cannonBody, scene, world,ground;
 
 console.log(rocketPhysics)
 
