@@ -6,10 +6,6 @@ import * as CANNON from 'cannon-es';
 export const W_KEY_DOWN_EVENT = 'wKeyDown';
 export const W_KEY_UP_EVENT = 'wKeyup'
 
-import { O_KEY_DOWN_EVENT,P_KEY_DOWN_EVENT } from './rocketControls';
-
-import {controlRocketThrottle} from './rocketControls.js'
-
 export class RocketPhysics {
   constructor(object3D, cannonBody, scene, world,ground) {
     this.object3D = object3D;
@@ -166,28 +162,47 @@ export class RocketPhysics {
   // ...
 }
 
-export function controlRocket(event,cannonBody) {
+export function controlRocket(event, cannonBody) {
+  let isWKeyDown = false;
+  let throttle = 50; // Initial throttle setting (50%)
 
-let thrust =  controlRocketThrottle()
+  if (event.key === 'w') {
+    console.log("going up!");
+    isWKeyDown = true;
 
-let isWKeyDown = false
-
-  if(event.key === 'w'){
-    console.log("going up!")
-    const wKeyDownEvent = new Event(W_KEY_DOWN_EVENT);
-    document.dispatchEvent(wKeyDownEvent);
-    const takeoffImpulse = new CANNON.Vec3(0, 10 * (thrust), 0);
+    // Use the current throttle setting
+    const throttleMultiplier = throttle / 100;
+    const takeoffImpulse = new CANNON.Vec3(0, 10 * throttleMultiplier, 0);
     const impulsePoint = new CANNON.Vec3();
     cannonBody.applyImpulse(takeoffImpulse, impulsePoint);
   }
 
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'ArrowUp') {
+      // Increase throttle
+      if (throttle < 100) {
+        throttle += 10; // Increase by 10%
+        console.log(`Throttle increased to ${throttle}%`);
+      }
+    } else if (event.key === 'ArrowDown') {
+      // Decrease throttle
+      if (throttle > 0) {
+        throttle -= 10; // Decrease by 10%
+        console.log(`Throttle decreased to ${throttle}%`);
+      }
+    }
+  });
+
   document.addEventListener('keyup', (event) => {
     if (event.key === 'w') {
-        // Key is released
-        console.log('w key released!');
-        isWKeyDown = false;
-        const wKeyUpEvent = new Event(W_KEY_UP_EVENT);
-        document.dispatchEvent(wKeyUpEvent);
+      // Key is released
+      console.log('w key released!');
+      isWKeyDown = false;
     }
-});
+  });
 }
+
+
+
+
+

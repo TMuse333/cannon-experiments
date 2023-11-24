@@ -8,8 +8,6 @@ export const W_KEY_UP_EVENT = 'wKeyup'
 
 import { O_KEY_DOWN_EVENT,P_KEY_DOWN_EVENT } from './rocketControls';
 
-import {controlRocketThrottle} from './rocketControls.js'
-
 export class RocketPhysics {
   constructor(object3D, cannonBody, scene, world,ground) {
     this.object3D = object3D;
@@ -168,7 +166,7 @@ export class RocketPhysics {
 
 export function controlRocket(event,cannonBody) {
 
-let thrust =  controlRocketThrottle()
+  c
 
 let isWKeyDown = false
 
@@ -176,7 +174,7 @@ let isWKeyDown = false
     console.log("going up!")
     const wKeyDownEvent = new Event(W_KEY_DOWN_EVENT);
     document.dispatchEvent(wKeyDownEvent);
-    const takeoffImpulse = new CANNON.Vec3(0, 10 * (thrust), 0);
+    const takeoffImpulse = new CANNON.Vec3(0, 10, 0);
     const impulsePoint = new CANNON.Vec3();
     cannonBody.applyImpulse(takeoffImpulse, impulsePoint);
   }

@@ -176,7 +176,7 @@ let isWKeyDown = false
     console.log("going up!")
     const wKeyDownEvent = new Event(W_KEY_DOWN_EVENT);
     document.dispatchEvent(wKeyDownEvent);
-    const takeoffImpulse = new CANNON.Vec3(0, 10 * (thrust), 0);
+    const takeoffImpulse = new CANNON.Vec3(0, 10 * , 0);
     const impulsePoint = new CANNON.Vec3();
     cannonBody.applyImpulse(takeoffImpulse, impulsePoint);
   }

@@ -5,7 +5,6 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader';
 import { threeToCannon, ShapeType } from 'three-to-cannon';
 import * as CANNON from 'cannon-es';
 import {createRaycaster} from './raycaster'
-import { controlRocket } from './rocketPhysics';
 
 
 export function createRocket(scene, world,ground,renderer,camera) {
