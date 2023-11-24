@@ -6,6 +6,7 @@ export function createDashboard(document) {
 
     document.body.appendChild(dashboardContainer);
 
+    console.log()
 
     document.addEventListener(W_KEY_DOWN_EVENT, () => {
         // Handle the "w" key down event

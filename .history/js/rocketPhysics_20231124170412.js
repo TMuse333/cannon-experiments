@@ -187,5 +187,27 @@ let isWKeyDown = false
 }
 
 
+export function rocketLaunch(cannonBody) {
+  const takeoffImpulse = new CANNON.Vec3(0, 100, 0);
+  const landingImpulse = new CANNON.Vec3(0, 40, 0); // Adjust the values as needed
+  const impulsePoint = new CANNON.Vec3();
 
+  // Apply the initial takeoff impulse
+  cannonBody.applyImpulse(takeoffImpulse, impulsePoint);
+
+  // Add damping to simulate controlled descent
+  // You can experiment with different damping values
+  cannonBody.linearDamping = 0.1;
+  cannonBody.angularDamping = 0.1;
+
+  // After a certain time or condition, switch to landing impulse
+  setTimeout(() => {
+    // Apply the landing impulse
+    cannonBody.applyImpulse(landingImpulse, impulsePoint);
+
+    // Increase damping for controlled landing
+    cannonBody.linearDamping = 0.5;
+    cannonBody.angularDamping = 0.5;
+  }, 3500); // Adjust the time as needed
+}
 

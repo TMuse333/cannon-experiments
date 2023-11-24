@@ -5,6 +5,7 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader';
 import { threeToCannon, ShapeType } from 'three-to-cannon';
 import * as CANNON from 'cannon-es';
 import {createRaycaster} from './raycaster'
+import { rocketLaunch } from './rocketPhysics';
 import { controlRocket } from './rocketPhysics';
 
 export function createRocket(scene, world,ground,renderer,camera) {
@@ -38,14 +39,17 @@ export function createRocket(scene, world,ground,renderer,camera) {
 
   // Set up the raycaster for the sphere
   const objectsToInteract = [object3D];
-  const cleanupRaycaster = createRaycaster(camera, scene, renderer, objectsToInteract);
+  const cleanupRaycaster = createRaycaster(camera, scene, renderer, objectsToInteract, onRocketClick);
 
  
+  
 
       function animateRocket() {
         object3D.position.copy(cannonBody.position).add(new THREE.Vector3(0, -0.45, 0));
         object3D.quaternion.copy(cannonBody.quaternion);
         
+        
+       
 
       }
 

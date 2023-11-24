@@ -4,7 +4,6 @@ import * as THREE from 'three';
 import * as CANNON from 'cannon-es';
 
 export const W_KEY_DOWN_EVENT = 'wKeyDown';
-export const W_KEY_UP_EVENT = 'wKeyup'
 
 export class RocketPhysics {
   constructor(object3D, cannonBody, scene, world,ground) {
@@ -163,9 +162,6 @@ export class RocketPhysics {
 }
 
 export function controlRocket(event,cannonBody) {
-
-let isWKeyDown = false
-
   if(event.key === 'w'){
     console.log("going up!")
     const wKeyDownEvent = new Event(W_KEY_DOWN_EVENT);
@@ -175,17 +171,36 @@ let isWKeyDown = false
     cannonBody.applyImpulse(takeoffImpulse, impulsePoint);
   }
 
-  document.addEventListener('keyup', (event) => {
-    if (event.key === 'w') {
-        // Key is released
-        console.log('w key released!');
-        isWKeyDown = false;
-        const wKeyUpEvent = new Event(W_KEY_UP_EVENT);
-        document.dispatchEvent(wKeyUpEvent);
-    }
-});
+  else if (event.type === 'keyup') {
+    // Key is released
+    console.log('w key released!');
+    const wKeyUpEvent = new Event(W_KEY_UP_EVENT);
+    document.dispatchEvent(wKeyUpEvent);
+  }
 }
 
 
+export function rocketLaunch(cannonBody) {
+  const takeoffImpulse = new CANNON.Vec3(0, 100, 0);
+  const landingImpulse = new CANNON.Vec3(0, 40, 0); // Adjust the values as needed
+  const impulsePoint = new CANNON.Vec3();
 
+  // Apply the initial takeoff impulse
+  cannonBody.applyImpulse(takeoffImpulse, impulsePoint);
+
+  // Add damping to simulate controlled descent
+  // You can experiment with different damping values
+  cannonBody.linearDamping = 0.1;
+  cannonBody.angularDamping = 0.1;
+
+  // After a certain time or condition, switch to landing impulse
+  setTimeout(() => {
+    // Apply the landing impulse
+    cannonBody.applyImpulse(landingImpulse, impulsePoint);
+
+    // Increase damping for controlled landing
+    cannonBody.linearDamping = 0.5;
+    cannonBody.angularDamping = 0.5;
+  }, 3500); // Adjust the time as needed
+}
 

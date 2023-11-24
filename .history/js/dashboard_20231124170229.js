@@ -6,6 +6,7 @@ export function createDashboard(document) {
 
     document.body.appendChild(dashboardContainer);
 
+    let ke
 
     document.addEventListener(W_KEY_DOWN_EVENT, () => {
         // Handle the "w" key down event
@@ -13,7 +14,13 @@ export function createDashboard(document) {
         dashboardContainer.innerHTML = 'W key is being held down!';
     });
 
-    document.addEventListener(W_KEY_UP_EVENT, () => {
-        dashboardContainer.innerHTML = ''; // Clear the content
+    document.addEventListener('keyup', (event) => {
+        if (event.key === 'w') {
+            // Key is released
+            console.log('w key released!');
+            isWKeyDown = false;
+            const wKeyUpEvent = new Event(W_KEY_UP_EVENT);
+            document.dispatchEvent(wKeyUpEvent);
+        }
     });
 }

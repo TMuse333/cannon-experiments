@@ -38,7 +38,7 @@ export function createRocket(scene, world,ground,renderer,camera) {
 
   // Set up the raycaster for the sphere
   const objectsToInteract = [object3D];
-  const cleanupRaycaster = createRaycaster(camera, scene, renderer, objectsToInteract);
+  const cleanupRaycaster = createRaycaster(camera, scene, renderer, objectsToInteract,);
 
  
 

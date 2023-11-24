@@ -6,14 +6,14 @@ import * as CANNON from 'cannon-es';
 import { createGround } from './ground.js';
 import { createRocket } from './rocket.js';
 import { RocketPhysics } from './rocketPhysics.js';
-import { createDashboard } from './dashboard.js';
+import { createDashboard, dashboardContainer } from './dashboard.js';
 
 
 const renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
-createDashboard(document)
+createDashboard
 
 const scene = new THREE.Scene();
 

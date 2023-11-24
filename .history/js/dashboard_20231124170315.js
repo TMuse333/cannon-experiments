@@ -13,7 +13,5 @@ export function createDashboard(document) {
         dashboardContainer.innerHTML = 'W key is being held down!';
     });
 
-    document.addEventListener(W_KEY_UP_EVENT, () => {
-        dashboardContainer.innerHTML = ''; // Clear the content
-    });
+    d
 }
