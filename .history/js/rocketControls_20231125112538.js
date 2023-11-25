@@ -1,5 +1,6 @@
 // rocketControls.js
-import * as CANNON from 'cannon-es';
+
+import * as CANNON from 'cannon-es'
 
 export const O_KEY_DOWN_EVENT = 'oKeyDown';
 export const P_KEY_DOWN_EVENT = 'pKeyDown';
@@ -13,6 +14,7 @@ let throttle = 40; // Initial throttle setting (50%)
 let pitchAngle = 0;
 let yawAngle = 0;
 let rollAngle = 0;
+
 
 document.addEventListener('keydown', (event) => {
   if (event.key === 'A') {
@@ -31,13 +33,15 @@ document.addEventListener('keydown', (event) => {
     // Pitch down
     pitchAngle -= 0.1;
     console.log(`Pitch angle: ${pitchAngle}`);
-  } else if (event.key === 'p' || event.key === 'o') {
-    // Handle throttle control
-    handleThrottleControl(event);
   }
 });
 
-function handleThrottleControl(event) {
+export function getGimbalAngles() {
+  // Return the current pitch, yaw, and roll angles
+  return { pitch: pitchAngle, yaw: yawAngle, roll: rollAngle };
+}
+
+document.addEventListener('keydown', (event) => {
   if (event.key === 'p') {
     // Increase throttle
     if (throttle < 100) {
@@ -51,35 +55,15 @@ function handleThrottleControl(event) {
       console.log(`Throttle decreased to ${throttle}%`);
     }
   }
-}
+});
 
 export function controlRocketThrottle() {
-  console.log(throttle);
+  console.log(throttle)
+
   return throttle / 100;
 }
 
-export function getThrustVector() {
+export function getThrustVector () {
   const takeoffImpulse = new CANNON.Vec3(0, 10 * (throttle / 100), 0);
-  return takeoffImpulse;
+  return takeoffImpulse
 }
-
-export function getGimbalAngles() {
-  // Return the current pitch, yaw, and roll angles
-  return { pitch: pitchAngle, yaw: yawAngle, roll: rollAngle };
-}
-
-export function getRotationVectors() {
-  // Convert angles to radians
-  const pitchRad = pitchAngle;
-  const yawRad = yawAngle;
-  const rollRad = rollAngle;
-
-  // Calculate rotation vectors based on Euler angles
-  const rotationX = new CANNON.Vec3(Math.sin(rollRad), Math.cos(rollRad) * Math.sin(pitchRad), Math.cos(rollRad) * Math.cos(pitchRad));
-  const rotationY = new CANNON.Vec3(-Math.cos(rollRad), Math.sin(rollRad) * Math.sin(pitchRad), Math.sin(rollRad) * Math.cos(pitchRad));
-  const rotationZ = new CANNON.Vec3(0, Math.cos(pitchRad), -Math.sin(pitchRad));
-
-  return { rotationX, rotationY, rotationZ };
-}
-
-

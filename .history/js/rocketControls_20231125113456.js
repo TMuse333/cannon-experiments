@@ -58,7 +58,7 @@ export function controlRocketThrottle() {
   return throttle / 100;
 }
 
-export function getThrustVector() {
+export function rocketBoost() {
   const takeoffImpulse = new CANNON.Vec3(0, 10 * (throttle / 100), 0);
   return takeoffImpulse;
 }
@@ -67,19 +67,3 @@ export function getGimbalAngles() {
   // Return the current pitch, yaw, and roll angles
   return { pitch: pitchAngle, yaw: yawAngle, roll: rollAngle };
 }
-
-export function getRotationVectors() {
-  // Convert angles to radians
-  const pitchRad = pitchAngle;
-  const yawRad = yawAngle;
-  const rollRad = rollAngle;
-
-  // Calculate rotation vectors based on Euler angles
-  const rotationX = new CANNON.Vec3(Math.sin(rollRad), Math.cos(rollRad) * Math.sin(pitchRad), Math.cos(rollRad) * Math.cos(pitchRad));
-  const rotationY = new CANNON.Vec3(-Math.cos(rollRad), Math.sin(rollRad) * Math.sin(pitchRad), Math.sin(rollRad) * Math.cos(pitchRad));
-  const rotationZ = new CANNON.Vec3(0, Math.cos(pitchRad), -Math.sin(pitchRad));
-
-  return { rotationX, rotationY, rotationZ };
-}
-
-

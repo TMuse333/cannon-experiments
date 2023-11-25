@@ -169,19 +169,17 @@ export class RocketPhysics {
 
 export function controlRocket(event,cannonBody) {
 
+
+
 let isWKeyDown = false
 
   if(event.key === 'w'){
     console.log("going up!")
     const wKeyDownEvent = new Event(W_KEY_DOWN_EVENT);
     document.dispatchEvent(wKeyDownEvent);
-    const takeoffImpulse = getThrustVector()
+   const takeoffImpulse = getThrustVector()
     const impulsePoint = new CANNON.Vec3();
     cannonBody.applyImpulse(takeoffImpulse, impulsePoint);
-  }
-
-  else if (key.event === '?') {
-
   }
 
   document.addEventListener('keyup', (event) => {

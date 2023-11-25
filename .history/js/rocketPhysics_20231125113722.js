@@ -180,9 +180,7 @@ let isWKeyDown = false
     cannonBody.applyImpulse(takeoffImpulse, impulsePoint);
   }
 
-  else if (key.event === '?') {
-
-  }
+  
 
   document.addEventListener('keyup', (event) => {
     if (event.key === 'w') {
