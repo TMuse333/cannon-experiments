@@ -81,12 +81,12 @@ export function getThrustVector(rocketQuaternion) {
     0   // Z component (adjust as needed)
   );
 
-  // forwardDirection.y = 0;
+  
 
   // Apply the forwardDirection to the thrust force
-  takeoffImpulse.x = takeoffImpulse.x +(forwardDirection.y * takeoffImpulse.y);
-  // takeoffImpulse.y =takeoffImpulse.y + (forwardDirection.y * takeoffImpulse.y);
-  takeoffImpulse.z = takeoffImpulse.z + (forwardDirection.y* takeoffImpulse.y);
+  takeoffImpulse.x = takeoffImpulse.x +(forwardDirection.x * takeoffImpulse.y;
+  takeoffImpulse.y = forwardDirection.y * takeoffImpulse.y;
+  takeoffImpulse.z = forwardDirection.z * takeoffImpulse.y;
 
   console.log(takeoffImpulse)
 

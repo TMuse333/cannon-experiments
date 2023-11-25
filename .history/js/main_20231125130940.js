@@ -18,14 +18,10 @@ document.body.appendChild(renderer.domElement);
 const scene = new THREE.Scene();
 
 const directionalLight = new THREE.DirectionalLight(0xffffff, 2);
-directionalLight.position.set(-1, 5, -1).normalize();
-directionalLight.castShadow = true;
-directionalLight.shadow.mapSize.width = 1024;
-directionalLight.shadow.mapSize.height = 1024;
+directionalLight.position.set(-1, 1, -1).normalize();
 scene.add(directionalLight);
 
 const ambientLight = new THREE.AmbientLight(0x404040);
-ambientLight.intensity = 0.5; 
 scene.add(ambientLight);
 
 const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);

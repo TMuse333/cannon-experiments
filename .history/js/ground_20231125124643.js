@@ -6,7 +6,7 @@ export function createGround(world, scene) {
     const groundPhysMat = new CANNON.Material();
 
     const groundBody = new CANNON.Body({
-        shape: new CANNON.Box(new CANNON.Vec3(50, 50, 0.1)),
+        shape: new CANNON.Box(new CANNON.Vec3(100, 50, 0.1)),
         type: CANNON.Body.STATIC,
         material: groundPhysMat
     });
@@ -14,7 +14,7 @@ export function createGround(world, scene) {
     world.addBody(groundBody);
     groundBody.quaternion.setFromEuler(-Math.PI / 2, 0, 0);
 
-    const groundGeo = new THREE.PlaneGeometry(100, 100);
+    const groundGeo = new THREE.PlaneGeometry(30, 30);
     const groundMat = new THREE.MeshBasicMaterial({
         color: 0x00ff00,
         side: THREE.DoubleSide,

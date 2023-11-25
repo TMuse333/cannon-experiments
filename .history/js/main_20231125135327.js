@@ -19,9 +19,6 @@ const scene = new THREE.Scene();
 
 const directionalLight = new THREE.DirectionalLight(0xffffff, 2);
 directionalLight.position.set(-1, 5, -1).normalize();
-directionalLight.castShadow = true;
-directionalLight.shadow.mapSize.width = 1024;
-directionalLight.shadow.mapSize.height = 1024;
 scene.add(directionalLight);
 
 const ambientLight = new THREE.AmbientLight(0x404040);

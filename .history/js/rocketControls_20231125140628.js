@@ -70,9 +70,6 @@ export function controlRocketThrottle() {
 export function getThrustVector(rocketQuaternion) {
   // rocketQuaternion is the quaternion representing the orientation of the rocket
   const forwardDirection = new THREE.Vector3(0, 0, -1).applyQuaternion(rocketQuaternion);
-  rocketQuaternion.vmult(forwardDirection, forwardDirection);
-  forwardDirection.normalize();
-  console.log('forward direction',forwardDirection)
 
   // Use the forwardDirection to calculate the thrust force
   const takeoffImpulse = new CANNON.Vec3(
@@ -81,14 +78,10 @@ export function getThrustVector(rocketQuaternion) {
     0   // Z component (adjust as needed)
   );
 
-  // forwardDirection.y = 0;
-
   // Apply the forwardDirection to the thrust force
-  takeoffImpulse.x = takeoffImpulse.x +(forwardDirection.y * takeoffImpulse.y);
-  // takeoffImpulse.y =takeoffImpulse.y + (forwardDirection.y * takeoffImpulse.y);
-  takeoffImpulse.z = takeoffImpulse.z + (forwardDirection.y* takeoffImpulse.y);
-
-  console.log(takeoffImpulse)
+  takeoffImpulse.x = forwardDirection.x * takeoffImpulse.y;
+  takeoffImpulse.y = forwardDirection.y * takeoffImpulse.y+100;
+  takeoffImpulse.z = forwardDirection.z * takeoffImpulse.y;
 
   return takeoffImpulse;
 }

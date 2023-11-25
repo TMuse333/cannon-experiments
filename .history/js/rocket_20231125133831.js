@@ -31,7 +31,9 @@ export function createRocket(scene, world,ground,renderer,camera) {
 
       world.addBody(cannonBody);
 
-     
+      var pitchTorque = new CANNON.Vec3(0, 0.1, 0.1);
+
+      cannonBody.angularVelocity.vadd(pitchTorque, cannonBody.angularVelocity);
 
       object3D.userData.clickable = true;
 

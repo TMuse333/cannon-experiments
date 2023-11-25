@@ -14,7 +14,7 @@ export function createGround(world, scene) {
     world.addBody(groundBody);
     groundBody.quaternion.setFromEuler(-Math.PI / 2, 0, 0);
 
-    const groundGeo = new THREE.PlaneGeometry(100, 100);
+    const groundGeo = new THREE.PlaneGeometry(30, 30);
     const groundMat = new THREE.MeshBasicMaterial({
         color: 0x00ff00,
         side: THREE.DoubleSide,

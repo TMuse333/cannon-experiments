@@ -31,7 +31,7 @@ export function createRocket(scene, world,ground,renderer,camera) {
 
       world.addBody(cannonBody);
 
-     
+      cann
 
       object3D.userData.clickable = true;
 

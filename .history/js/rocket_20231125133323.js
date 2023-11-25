@@ -31,7 +31,7 @@ export function createRocket(scene, world,ground,renderer,camera) {
 
       world.addBody(cannonBody);
 
-     
+      var pitchTor
 
       object3D.userData.clickable = true;
 

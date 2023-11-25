@@ -6,7 +6,7 @@ export function createGround(world, scene) {
     const groundPhysMat = new CANNON.Material();
 
     const groundBody = new CANNON.Body({
-        shape: new CANNON.Box(new CANNON.Vec3(50, 50, 0.1)),
+        shape: new CANNON.Box(new CANNON.Vec3(100, 15, 0.1)),
         type: CANNON.Body.STATIC,
         material: groundPhysMat
     });

@@ -1,6 +1,5 @@
 // rocketControls.js
 import * as CANNON from 'cannon-es';
-import * as THREE from 'three'
 
 export const O_KEY_DOWN_EVENT = 'oKeyDown';
 export const P_KEY_DOWN_EVENT = 'pKeyDown';
@@ -67,33 +66,39 @@ export function controlRocketThrottle() {
   return throttle / 100;
 }
 
-export function getThrustVector(rocketQuaternion) {
-  // rocketQuaternion is the quaternion representing the orientation of the rocket
-  const forwardDirection = new THREE.Vector3(0, 0, -1).applyQuaternion(rocketQuaternion);
-  rocketQuaternion.vmult(forwardDirection, forwardDirection);
-  forwardDirection.normalize();
-  console.log('forward direction',forwardDirection)
-
-  // Use the forwardDirection to calculate the thrust force
-  const takeoffImpulse = new CANNON.Vec3(
-    0,  // X component (adjust as needed)
-    10 * (throttle / 100),  // Y component, adjusted by throttle
-    0   // Z component (adjust as needed)
-  );
-
-  // forwardDirection.y = 0;
-
-  // Apply the forwardDirection to the thrust force
-  takeoffImpulse.x = takeoffImpulse.x +(forwardDirection.y * takeoffImpulse.y);
-  // takeoffImpulse.y =takeoffImpulse.y + (forwardDirection.y * takeoffImpulse.y);
-  takeoffImpulse.z = takeoffImpulse.z + (forwardDirection.y* takeoffImpulse.y);
-
-  console.log(takeoffImpulse)
-
-  return takeoffImpulse;
+export function getThrustVector() {
+  if (isWKeyDown) {
+    return new CANNON.Vec3(0, 10 * (throttle / 100), 0);
+  }
+  return new CANNON.Vec3(0,0, 0);
 }
 
+export function getGimbalAngles() {
+  return { pitch: pitchAngle, yaw: yawAngle, roll: rollAngle };
+}
+
+export function getRotationVectors() {
+  const pitchRad = pitchAngle * (Math.PI / 180);
+  const yawRad = yawAngle;
+  const rollRad = rollAngle;
+
+  console.log('angles',pitchAngle,yawAngle,rollAngle)
+
+  const rotationX = new CANNON.Vec3(
+    Math.sin(rollRad),
+    Math.cos(rollRad) * Math.sin(pitchRad),
+    Math.cos(rollRad) * Math.cos(pitchRad)
+  );
+  const rotationY = new CANNON.Vec3(-Math.cos(rollRad), Math.sin(rollRad) * Math.sin(pitchRad), Math.sin(rollRad) * Math.cos(pitchRad));
+  const rotationZ = new CANNON.Vec3(0, Math.cos(pitchRad), -Math.sin(pitchRad));
 
 
+  return { rotationX, rotationY, rotationZ };
+}
 
-
+export function getStrafeVector() {
+  if (isSKeyDown) {
+    return new CANNON.Vec3(0, -10, 0); // Adjust values as needed
+  }
+  return new CANNON.Vec3(0, 0, 0);
+}
