@@ -8,13 +8,10 @@ export const W_KEY_UP_EVENT = 'wKeyup'
 
 import { O_KEY_DOWN_EVENT,P_KEY_DOWN_EVENT } from './rocketControls';
 
-import { isAKeyDown,isWKeyDown,
-isDKeyDown,isSKeyDown } from './rocketControls';
+import { isAKeyDown,is } from './rocketControls';
 
 
 import { getThrustVector } from './rocketControls';
-import { getRotationVectors } from './rocketControls';
-
 
 export class RocketPhysics {
   constructor(object3D, cannonBody, scene, world,ground) {
@@ -34,7 +31,7 @@ export class RocketPhysics {
     this.initFlightTimeDisplay();
 
    
-    
+
 
 
   }
@@ -174,9 +171,9 @@ export class RocketPhysics {
 
 export function controlRocket(event,cannonBody) {
 
-let isWKeyDown2 = false
+let isWKeyDown = false
 
-  if(isWKeyDown){
+  if(event.key === 'w'){
     console.log("going up!")
     const wKeyDownEvent = new Event(W_KEY_DOWN_EVENT);
     document.dispatchEvent(wKeyDownEvent);
@@ -184,15 +181,6 @@ let isWKeyDown2 = false
     console.log(takeoffImpulse)
     const impulsePoint = new CANNON.Vec3();
     cannonBody.applyImpulse(takeoffImpulse, impulsePoint);
-  }
-
-  if(isDKeyDown){
-    console.log("d key down")
-    const rotation = getRotationVectors()
-    const impulsePoint = new CANNON.Vec3();
-    const rotationY = rotation.rotationZ
-    console.log(rotationY)
-    cannonBody.applyImpulse(rotationY, impulsePoint)
   }
 
   // else if (key.event === '?') {
@@ -203,7 +191,7 @@ let isWKeyDown2 = false
     if (event.key === 'w') {
         // Key is released
         console.log('w key released!');
-        isWKeyDown2 = false;
+        isWKeyDown = false;
         const wKeyUpEvent = new Event(W_KEY_UP_EVENT);
         document.dispatchEvent(wKeyUpEvent);
     }

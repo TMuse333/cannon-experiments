@@ -8,7 +8,7 @@ export const D_KEY_DOWN_EVENT = 'dKeyDown';
 export const W_KEY_DOWN_EVENT = 'wKeyDown';
 export const S_KEY_DOWN_EVENT = 'sKeyDown';
 
-let throttle = 70; // Initial throttle setting (50%)
+let throttle = 40; // Initial throttle setting (50%)
 
 let pitchAngle = 0;
 let yawAngle = 0;
@@ -86,7 +86,7 @@ export function getRotationVectors() {
   const rotationY = new CANNON.Vec3(-Math.cos(rollRad), Math.sin(rollRad) * Math.sin(pitchRad), Math.sin(rollRad) * Math.cos(pitchRad));
   const rotationZ = new CANNON.Vec3(0, Math.cos(pitchRad), -Math.sin(pitchRad));
 
-
+  
   return { rotationX, rotationY, rotationZ };
 }
 

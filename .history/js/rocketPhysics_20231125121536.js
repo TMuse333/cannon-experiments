@@ -15,7 +15,6 @@ isDKeyDown,isSKeyDown } from './rocketControls';
 import { getThrustVector } from './rocketControls';
 import { getRotationVectors } from './rocketControls';
 
-
 export class RocketPhysics {
   constructor(object3D, cannonBody, scene, world,ground) {
     this.object3D = object3D;
@@ -186,11 +185,11 @@ let isWKeyDown2 = false
     cannonBody.applyImpulse(takeoffImpulse, impulsePoint);
   }
 
-  if(isDKeyDown){
+  if(isDKeyDown){d
     console.log("d key down")
     const rotation = getRotationVectors()
     const impulsePoint = new CANNON.Vec3();
-    const rotationY = rotation.rotationZ
+    const rotationY = rotation.rotationY
     console.log(rotationY)
     cannonBody.applyImpulse(rotationY, impulsePoint)
   }

@@ -13,7 +13,6 @@ isDKeyDown,isSKeyDown } from './rocketControls';
 
 
 import { getThrustVector } from './rocketControls';
-import { getRotationVectors } from './rocketControls';
 
 
 export class RocketPhysics {
@@ -34,7 +33,7 @@ export class RocketPhysics {
     this.initFlightTimeDisplay();
 
    
-    
+
 
 
   }
@@ -187,12 +186,7 @@ let isWKeyDown2 = false
   }
 
   if(isDKeyDown){
-    console.log("d key down")
-    const rotation = getRotationVectors()
-    const impulsePoint = new CANNON.Vec3();
-    const rotationY = rotation.rotationZ
-    console.log(rotationY)
-    cannonBody.applyImpulse(rotationY, impulsePoint)
+    const rotation = 
   }
 
   // else if (key.event === '?') {

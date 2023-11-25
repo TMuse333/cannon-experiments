@@ -8,25 +8,25 @@ export const D_KEY_DOWN_EVENT = 'dKeyDown';
 export const W_KEY_DOWN_EVENT = 'wKeyDown';
 export const S_KEY_DOWN_EVENT = 'sKeyDown';
 
-let throttle = 70; // Initial throttle setting (50%)
+let throttle = 40; // Initial throttle setting (50%)
 
 let pitchAngle = 0;
 let yawAngle = 0;
 let rollAngle = 0;
 
-export let isWKeyDown = false;
-export let isAKeyDown = false;
-export let isDKeyDown = false;
-export let isSKeyDown = false;
+let isWKeyDown = false;
+let isAKeyDown = false;
+let isDKeyDown = false;
+let isSKeyDown = false;
 
 document.addEventListener('keydown', (event) => {
-  if (event.key === 'a') {
+  if (event.key === 'A') {
     isAKeyDown = true;
-  } else if (event.key === 'd') {
+  } else if (event.key === 'D') {
     isDKeyDown = true;
-  } else if (event.key === 'w') {
+  } else if (event.key === 'W') {
     isWKeyDown = true;
-  } else if (event.key === 's') {
+  } else if (event.key === 'S') {
     isSKeyDown = true;
   } else if (event.key === 'p' || event.key === 'o') {
     handleThrottleControl(event);
@@ -34,13 +34,13 @@ document.addEventListener('keydown', (event) => {
 });
 
 document.addEventListener('keyup', (event) => {
-  if (event.key === 'a') {
+  if (event.key === 'A') {
     isAKeyDown = false;
-  } else if (event.key === 'd') {
+  } else if (event.key === 'D') {
     isDKeyDown = false;
-  } else if (event.key === 'w') {
+  } else if (event.key === 'W') {
     isWKeyDown = false;
-  } else if (event.key === 's') {
+  } else if (event.key === 'S') {
     isSKeyDown = false;
   }
 });
@@ -70,7 +70,7 @@ export function getThrustVector() {
   if (isWKeyDown) {
     return new CANNON.Vec3(0, 10 * (throttle / 100), 0);
   }
-  return new CANNON.Vec3(0,0, 0);
+  return new CANNON.Vec3(0,10, 0);
 }
 
 export function getGimbalAngles() {
@@ -85,7 +85,6 @@ export function getRotationVectors() {
   const rotationX = new CANNON.Vec3(Math.sin(rollRad), Math.cos(rollRad) * Math.sin(pitchRad), Math.cos(rollRad) * Math.cos(pitchRad));
   const rotationY = new CANNON.Vec3(-Math.cos(rollRad), Math.sin(rollRad) * Math.sin(pitchRad), Math.sin(rollRad) * Math.cos(pitchRad));
   const rotationZ = new CANNON.Vec3(0, Math.cos(pitchRad), -Math.sin(pitchRad));
-
 
   return { rotationX, rotationY, rotationZ };
 }

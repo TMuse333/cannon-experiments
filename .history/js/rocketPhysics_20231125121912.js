@@ -186,7 +186,7 @@ let isWKeyDown2 = false
     cannonBody.applyImpulse(takeoffImpulse, impulsePoint);
   }
 
-  if(isDKeyDown){
+  if(isDKeyDown){x
     console.log("d key down")
     const rotation = getRotationVectors()
     const impulsePoint = new CANNON.Vec3();

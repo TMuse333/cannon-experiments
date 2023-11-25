@@ -190,7 +190,7 @@ let isWKeyDown2 = false
     console.log("d key down")
     const rotation = getRotationVectors()
     const impulsePoint = new CANNON.Vec3();
-    const rotationY = rotation.rotationZ
+    const rotationY = rotation.rotationY
     console.log(rotationY)
     cannonBody.applyImpulse(rotationY, impulsePoint)
   }
