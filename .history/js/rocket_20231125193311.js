@@ -42,8 +42,6 @@ export function createRocket(scene, world,ground,renderer,camera) {
         if(event.key === 'r' ){
           cannonBody.position = new CANNON.Vec3(offset.x, offset.y + 25, offset.z)
           cannonBody.quaternion.set(0,0,0,1)
-          cannonBody.velocity.set(0, 0, 0);
-          cannonBody.angularVelocity.set(0, 0, 0);
         }
         
       })

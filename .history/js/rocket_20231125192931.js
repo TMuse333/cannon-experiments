@@ -39,13 +39,8 @@ export function createRocket(scene, world,ground,renderer,camera) {
       document.addEventListener('keydown', (event) => controlRocket(event, cannonBody));
 
       document.addEventListener('keydown', (event) =>{
-        if(event.key === 'r' ){
-          cannonBody.position = new CANNON.Vec3(offset.x, offset.y + 25, offset.z)
-          cannonBody.quaternion.set(0,0,0,1)
-          cannonBody.velocity.set(0, 0, 0);
-          cannonBody.angularVelocity.set(0, 0, 0);
-        }
-        
+        if(event.key === 'r' )
+        ca
       })
 
   // Set up the raycaster for the sphere

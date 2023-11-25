@@ -181,7 +181,7 @@ let isWKeyDown2 = false
     const wKeyDownEvent = new Event(W_KEY_DOWN_EVENT);
     document.dispatchEvent(wKeyDownEvent);
     const takeoffImpulse = getThrustVector(cannonBody.quaternion)
-
+    console.log(takeoffImpulse)
     const impulsePoint = new CANNON.Vec3();
     cannonBody.applyImpulse(takeoffImpulse, impulsePoint);
   }
@@ -189,7 +189,7 @@ let isWKeyDown2 = false
   if (isDKeyDown) {
 
 
-    console.log('quaternion',cannonBody.quaternion)
+    console.log('quaternion',)
 
     // Define the maximum tilt angle in radians (adjust as needed)
     const maxTiltAngle = Math.PI / 4; // For example, 45 degrees

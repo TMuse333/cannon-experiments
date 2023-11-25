@@ -181,15 +181,13 @@ let isWKeyDown2 = false
     const wKeyDownEvent = new Event(W_KEY_DOWN_EVENT);
     document.dispatchEvent(wKeyDownEvent);
     const takeoffImpulse = getThrustVector(cannonBody.quaternion)
-
+    console.log(takeoffImpulse)
     const impulsePoint = new CANNON.Vec3();
     cannonBody.applyImpulse(takeoffImpulse, impulsePoint);
   }
 
   if (isDKeyDown) {
-
-
-    console.log('quaternion',cannonBody.quaternion)
+    console.log("d key down");
 
     // Define the maximum tilt angle in radians (adjust as needed)
     const maxTiltAngle = Math.PI / 4; // For example, 45 degrees
@@ -199,7 +197,6 @@ let isWKeyDown2 = false
 
     // Check if the current pitch angle is below the maximum tilt angle
     if (Math.abs(currentPitchAngle) < maxTiltAngle) {
-      console.log("the pitch",currentPitchAngle)
         // If within the limit, apply the pitch torque
         const pitchTorque = new CANNON.Vec3(0.1, 0, 0);
         cannonBody.angularVelocity.vadd(pitchTorque, cannonBody.angularVelocity);
@@ -219,7 +216,7 @@ let isWKeyDown2 = false
   document.addEventListener('keyup', (event) => {
     if (event.key === 'w') {
         // Key is released
-       
+        console.log('w key released!');
         isWKeyDown2 = false;
         const wKeyUpEvent = new Event(W_KEY_UP_EVENT);
         document.dispatchEvent(wKeyUpEvent);

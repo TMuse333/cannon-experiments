@@ -181,7 +181,7 @@ let isWKeyDown2 = false
     const wKeyDownEvent = new Event(W_KEY_DOWN_EVENT);
     document.dispatchEvent(wKeyDownEvent);
     const takeoffImpulse = getThrustVector(cannonBody.quaternion)
-
+    console.log(takeoffImpulse)
     const impulsePoint = new CANNON.Vec3();
     cannonBody.applyImpulse(takeoffImpulse, impulsePoint);
   }
