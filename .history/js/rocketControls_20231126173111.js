@@ -34,7 +34,7 @@ document.addEventListener('keydown', (event) => {
   }
     else if(event.key === 'k'){
       isKKeyDown = true
-      console.log("k key down")
+      console.log
     }
 });
 

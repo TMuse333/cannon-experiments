@@ -7,7 +7,7 @@ import { createGround } from './ground.js';
 import { createRocket } from './rocket.js';
 import { RocketPhysics } from './rocketPhysics.js';
 import { createDashboard } from './dashboard.js';
-import { camera, updateCamera,renderer, } from './camera.js';
+import { camera, updateCamera,renderer,rotateCameraBy90Degrees,isCameraLocked } from './camera.js';
 
 
 
@@ -35,7 +35,17 @@ const world = new CANNON.World({
 });
 
 
+document.addEventListener('keydown', (event) => {
+  if (event.key === 't') {
+    // Toggle camera mode
+    isCameraLocked = !isCameraLocked;
+  }
 
+  if (event.key === 'b') {
+    // Rotate camera by 90 degrees
+    rotateCameraBy90Degrees();
+  }
+});
 
 
 

@@ -36,12 +36,7 @@ function updateCamera(rocket) {
   if (isCameraLocked && rocket && rocket.object3D) {
     if (isSideView) {
       // Set the camera to a side view
-      const sideViewOffset = new THREE.Vector3(30, 0, -20); // Adjust the offset as needed
-
-      // Rotate the offset based on the rocket's orientation
-      const rotationQuaternion = rocket.object3D.quaternion.clone();
-      sideViewOffset.applyQuaternion(rotationQuaternion);
-
+      const sideViewOffset = new THREE.Vector3(5, 0, 0); // Adjust the offset as needed
       const sideViewPosition = rocket.object3D.position.clone().add(sideViewOffset);
       const sideViewLookAt = rocket.object3D.position.clone();
 
