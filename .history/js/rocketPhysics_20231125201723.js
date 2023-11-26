@@ -207,27 +207,9 @@ export function controlRocket(event,cannonBody) {
   }
 }
 
-if (isSKeyDown) {
+  // else if (key.event === '?') {
 
-  console.log('quaternion',cannonBody.quaternion)
-
-  // Get the current pitch angle from the quaternion
-  
-
-  // Check if the current pitch angle is below the maximum tilt angle
-  if (cannonBody.quaternion.x > -0.2) {
-    
-      // If within the limit, apply the pitch torque
-      const pitchTorque = new CANNON.Vec3(-0.1, 0, 0);
-      cannonBody.angularVelocity.vadd(pitchTorque, cannonBody.angularVelocity);
-  }
-  else {
-    // If exceeding the limit, apply a counter torque to prevent further tilting
-    console.log("full counter!!!")
-    const counterTorque = new CANNON.Vec3(0.1, 0, 0);
-    cannonBody.angularVelocity.vadd(counterTorque, cannonBody.angularVelocity);
-}
-}
+  // }
 
   document.addEventListener('keyup', (event) => {
     if (event.key === 'k') {

@@ -34,6 +34,8 @@ document.addEventListener('keydown', (event) => {
   }
     else if(event.key === 'k'){
       isKKeyDown = true
+      const kKeyDownEvent = new Event(K_KEY_DOWN_EVENT);
+    document.dispatchEvent(kKeyDownEvent);
     }
 });
 

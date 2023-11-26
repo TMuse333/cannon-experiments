@@ -212,11 +212,11 @@ if (isSKeyDown) {
   console.log('quaternion',cannonBody.quaternion)
 
   // Get the current pitch angle from the quaternion
-  
+  const currentPitchAngle = Math.asin(2 * (cannonBody.quaternion.x * cannonBody.quaternion.y + cannonBody.quaternion.z * cannonBody.quaternion.w));
 
   // Check if the current pitch angle is below the maximum tilt angle
-  if (cannonBody.quaternion.x > -0.2) {
-    
+  if (cannonBody.quaternion.x < -0.2) {
+    console.log("the pitch",currentPitchAngle)
       // If within the limit, apply the pitch torque
       const pitchTorque = new CANNON.Vec3(-0.1, 0, 0);
       cannonBody.angularVelocity.vadd(pitchTorque, cannonBody.angularVelocity);

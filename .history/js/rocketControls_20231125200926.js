@@ -8,8 +8,7 @@ export const A_KEY_DOWN_EVENT = 'aKeyDown';
 export const D_KEY_DOWN_EVENT = 'dKeyDown';
 export const W_KEY_DOWN_EVENT = 'wKeyDown';
 export const S_KEY_DOWN_EVENT = 'sKeyDown';
-export const K_KEY_DOWN_EVENT = 'kKeyDown';
-
+export cont
 
 let throttle = 70; // Initial throttle setting (50%)
 

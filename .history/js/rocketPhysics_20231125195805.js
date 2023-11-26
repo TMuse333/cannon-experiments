@@ -3,13 +3,13 @@
 import * as THREE from 'three';
 import * as CANNON from 'cannon-es';
 
-export const K_KEY_DOWN_EVENT = 'kKeyDown';
-export const K_KEY_UP_EVENT = 'kKeyup'
+export const W_KEY_DOWN_EVENT = 'wKeyDown';
+export const W_KEY_UP_EVENT = 'wKeyup'
 
-import { O_KEY_DOWN_EVENT,P_KEY_DOWN_EVENT, } from './rocketControls';
+import { O_KEY_DOWN_EVENT,P_KEY_DOWN_EVENT } from './rocketControls';
 
 import { isAKeyDown,isWKeyDown,
-isDKeyDown,isSKeyDown,isKKeyDown } from './rocketControls';
+isDKeyDown,isSKeyDown } from './rocketControls';
 
 
 import { getThrustVector } from './rocketControls';
@@ -174,27 +174,32 @@ export class RocketPhysics {
 
 export function controlRocket(event,cannonBody) {
 
-// let isKKeyDown2 = false
+let isWKeyDown2 = false
 
-  if(isKKeyDown){
+  if(isWKeyDown){
     console.log("going up!")
-    const kKeyDownEvent = new Event(K_KEY_DOWN_EVENT);
-    document.dispatchEvent(kKeyDownEvent);
+    const wKeyDownEvent = new Event(W_KEY_DOWN_EVENT);
+    document.dispatchEvent(wKeyDownEvent);
     const takeoffImpulse = getThrustVector(cannonBody.quaternion)
 
     const impulsePoint = new CANNON.Vec3();
     cannonBody.applyImpulse(takeoffImpulse, impulsePoint);
   }
 
-  if (isWKeyDown) {
+  if (isDKeyDown) {
+
 
     console.log('quaternion',cannonBody.quaternion)
 
-   
+    // Define the maximum tilt angle in radians (adjust as needed)
+    const maxTiltAngle = Math.PI / 4; // For example, 45 degrees
+
+    // Get the current pitch angle from the quaternion
+    const currentPitchAngle = Math.asin(2 * (cannonBody.quaternion.x * cannonBody.quaternion.y + cannonBody.quaternion.z * cannonBody.quaternion.w));
 
     // Check if the current pitch angle is below the maximum tilt angle
-    if (cannonBody.quaternion.x < 0.2) {
-    
+    if (cannonBody.quaternion.x ) {
+      console.log("the pitch",currentPitchAngle)
         // If within the limit, apply the pitch torque
         const pitchTorque = new CANNON.Vec3(0.1, 0, 0);
         cannonBody.angularVelocity.vadd(pitchTorque, cannonBody.angularVelocity);
@@ -202,40 +207,22 @@ export function controlRocket(event,cannonBody) {
     else {
       // If exceeding the limit, apply a counter torque to prevent further tilting
       console.log("full counter!!!")
-      const counterTorque = new CANNON.Vec3(-0.1, 0, 0);
+      const counterTorque = new CANNON.Vec3(-100, 0, 0);
       cannonBody.angularVelocity.vadd(counterTorque, cannonBody.angularVelocity);
   }
 }
 
-if (isSKeyDown) {
+  // else if (key.event === '?') {
 
-  console.log('quaternion',cannonBody.quaternion)
-
-  // Get the current pitch angle from the quaternion
-  
-
-  // Check if the current pitch angle is below the maximum tilt angle
-  if (cannonBody.quaternion.x > -0.2) {
-    
-      // If within the limit, apply the pitch torque
-      const pitchTorque = new CANNON.Vec3(-0.1, 0, 0);
-      cannonBody.angularVelocity.vadd(pitchTorque, cannonBody.angularVelocity);
-  }
-  else {
-    // If exceeding the limit, apply a counter torque to prevent further tilting
-    console.log("full counter!!!")
-    const counterTorque = new CANNON.Vec3(0.1, 0, 0);
-    cannonBody.angularVelocity.vadd(counterTorque, cannonBody.angularVelocity);
-}
-}
+  // }
 
   document.addEventListener('keyup', (event) => {
-    if (event.key === 'k') {
+    if (event.key === 'w') {
         // Key is released
        
-        // isKKeyDown2 = false;
-        const kKeyUpEvent = new Event(K_KEY_UP_EVENT);
-        document.dispatchEvent(kKeyUpEvent);
+        isWKeyDown2 = false;
+        const wKeyUpEvent = new Event(W_KEY_UP_EVENT);
+        document.dispatchEvent(wKeyUpEvent);
     }
 });
 }

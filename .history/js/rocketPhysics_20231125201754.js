@@ -215,7 +215,7 @@ if (isSKeyDown) {
   
 
   // Check if the current pitch angle is below the maximum tilt angle
-  if (cannonBody.quaternion.x > -0.2) {
+  if (cannonBody.quaternion.x < -0.2) {
     
       // If within the limit, apply the pitch torque
       const pitchTorque = new CANNON.Vec3(-0.1, 0, 0);

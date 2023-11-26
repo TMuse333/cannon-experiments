@@ -23,7 +23,7 @@ export function createDashboard(document) {
         }
     });
 
-    document.addEventListener(K_KEY_UP_EVENT, () => {
+    document.addEventListener(W_KEY_UP_EVENT, () => {
         throttle = controlRocketThrottle();
         updateDashboard(throttle);
     });

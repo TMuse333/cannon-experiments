@@ -8,8 +8,6 @@ export const A_KEY_DOWN_EVENT = 'aKeyDown';
 export const D_KEY_DOWN_EVENT = 'dKeyDown';
 export const W_KEY_DOWN_EVENT = 'wKeyDown';
 export const S_KEY_DOWN_EVENT = 'sKeyDown';
-export const K_KEY_DOWN_EVENT = 'kKeyDown';
-
 
 let throttle = 70; // Initial throttle setting (50%)
 
@@ -18,7 +16,7 @@ export let isWKeyDown = false;
 export let isAKeyDown = false;
 export let isDKeyDown = false;
 export let isSKeyDown = false;
-export let isKKeyDown = false;
+export let isKKeyDown = false
 
 document.addEventListener('keydown', (event) => {
   if (event.key === 'a') {
@@ -32,9 +30,6 @@ document.addEventListener('keydown', (event) => {
   } else if (event.key === 'p' || event.key === 'o') {
     handleThrottleControl(event);
   }
-    else if(event.key === 'k'){
-      isKKeyDown = true
-    }
 });
 
 document.addEventListener('keyup', (event) => {
@@ -47,10 +42,6 @@ document.addEventListener('keyup', (event) => {
   } else if (event.key === 's') {
     isSKeyDown = false;
   }
-    else if (event.key === 'k') {
-    isSKeyDown = false;
-  }
-  
 });
 
 function handleThrottleControl(event) {

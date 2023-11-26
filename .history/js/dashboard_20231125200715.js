@@ -1,4 +1,4 @@
-import { K_KEY_DOWN_EVENT, K_KEY_UP_EVENT } from './rocketPhysics';
+import { K_KEY_DOWN_EVENT, W_KEY_UP_EVENT } from './rocketPhysics';
 import { controlRocketThrottle } from './rocketControls';
 
 export function createDashboard(document) {
@@ -13,7 +13,7 @@ export function createDashboard(document) {
 
     document.addEventListener('keydown', (event) => {
         // Check if the pressed key is 'w'
-        if (event.key === 'k') {
+        if (event.key === 'w') {
             throttle = controlRocketThrottle();
             updateDashboard(throttle, true);
         } else {
@@ -23,7 +23,7 @@ export function createDashboard(document) {
         }
     });
 
-    document.addEventListener(K_KEY_UP_EVENT, () => {
+    document.addEventListener(W_KEY_UP_EVENT, () => {
         throttle = controlRocketThrottle();
         updateDashboard(throttle);
     });
