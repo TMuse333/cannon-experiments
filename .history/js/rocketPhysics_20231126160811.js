@@ -202,7 +202,7 @@ export function controlRocket(event,cannonBody) {
     else {
       // If exceeding the limit, apply a counter torque to prevent further tilting
       console.log("full counter!!!")
-      const counterTorque = cannonBody.angularVelocity.clone().negate();
+      const counterTorque = cannonBody.angularVelocity.clone().negate();t
       cannonBody.angularVelocity.vadd(counterTorque, cannonBody.angularVelocity);
   }
 }

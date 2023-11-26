@@ -7,10 +7,12 @@ import { createGround } from './ground.js';
 import { createRocket } from './rocket.js';
 import { RocketPhysics } from './rocketPhysics.js';
 import { createDashboard } from './dashboard.js';
-import { camera, updateCamera,renderer,rotateCameraBy90Degrees,isCameraLocked } from './camera.js';
+import { camera, updateCamera } from './camera.js';
 
 
-
+const renderer = new THREE.WebGLRenderer();
+renderer.setSize(window.innerWidth, window.innerHeight);
+document.body.appendChild(renderer.domElement);
 
 // createDashboard(document)
 
@@ -26,8 +28,6 @@ scene.add(directionalLight);
 const ambientLight = new THREE.AmbientLight(0x404040);
 ambientLight.intensity = 0.5; 
 scene.add(ambientLight);
-
-
 
 
 const world = new CANNON.World({
@@ -47,9 +47,36 @@ document.addEventListener('keydown', (event) => {
   }
 });
 
+function rotateCameraBy90Degrees() {
+  console.log('rotation')
+  const currentRotation = camera.rotation.y;
+  const newRotation = currentRotation + Math.PI / 2; // Rotate by 90 degrees
 
+  // Set the new rotation while keeping the same distance from the target
+  const distance = camera.position.distanceTo(targetPosition);
+  const newX = targetPosition.x + distance * Math.sin(newRotation);
+  const newZ = targetPosition.z + distance * Math.cos(newRotation);
 
+  camera.position.set(newX, camera.position.y, newZ);
+  camera.rotation.y = newRotation;
 
+  // Ensure camera is looking at the target
+  camera.lookAt(targetPosition);
+}
+
+function updateCamera(rocket) {
+  const offset = new THREE.Vector3(0, 5, -25);
+
+  if (isCameraLocked && rocket && rocket.object3D) {
+    // Follow the rocket
+    targetPosition.copy(rocket.object3D.position).add(offset);
+    camera.position.lerp(targetPosition, 0.1);
+    camera.lookAt(rocket.object3D.position);
+  } else {
+    // Free-roaming mode
+    orbit.update();
+  }
+}
 
 const ground = createGround(world, scene);
 
@@ -87,7 +114,7 @@ console.log("test")
       rocket.object3D.quaternion.copy(rocket.cannonBody.quaternion);
     }
 
-  updateCamera(rocket)
+    updateCamera(rocket)
 
     rocketPhysics.continuousUpdate();
 

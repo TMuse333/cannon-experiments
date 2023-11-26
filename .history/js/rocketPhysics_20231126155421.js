@@ -176,13 +176,14 @@ export function controlRocket(event,cannonBody) {
 
 // let isKKeyDown2 = false
 
-  if(isKKeyDown){
+const takeoffImpulse = getThrustVector(cannonBody.quaternion)
+const impulsePoint = new CANNON.Vec3();
+
+  if(isKKeyDown && ){
     console.log("going up!")
     const kKeyDownEvent = new Event(K_KEY_DOWN_EVENT);
     document.dispatchEvent(kKeyDownEvent);
-    const takeoffImpulse = getThrustVector(cannonBody.quaternion)
-
-    const impulsePoint = new CANNON.Vec3();
+  
     cannonBody.applyImpulse(takeoffImpulse, impulsePoint);
   }
 
@@ -199,32 +200,34 @@ export function controlRocket(event,cannonBody) {
         const pitchTorque = new CANNON.Vec3(0.1, 0, 0);
         cannonBody.angularVelocity.vadd(pitchTorque, cannonBody.angularVelocity);
     }
-    else {
-      // If exceeding the limit, apply a counter torque to prevent further tilting
-      console.log("full counter!!!")
-      const counterTorque = cannonBody.angularVelocity.clone().negate();
-      cannonBody.angularVelocity.vadd(counterTorque, cannonBody.angularVelocity);
-  }
+}
+
+if(cannonBody.quaternion.x >0.2){
+  console.log("full counter!!!")
+  const counterTorque = new CANNON.Vec3(-0.1, 0, 0);
+  cannonBody.angularVelocity.vadd(counterTorque, cannonBody.angularVelocity);
+  cannonBody.applyImpulse(takeoffImpulse, impulsePoint);
 }
 
 if (isSKeyDown) {
-  console.log('quaternion', cannonBody.quaternion);
+
+  console.log('quaternion',cannonBody.quaternion)
+
 
   if (cannonBody.quaternion.x > -0.2) {
-    // If within the limit, apply the pitch torque
-    const pitchTorque = new CANNON.Vec3(-0.1, 0, 0);
-    cannonBody.angularVelocity.vadd(pitchTorque, cannonBody.angularVelocity);
-  } else {
-    // If exceeding the limit, apply a counter torque to prevent further tilting
-    console.log("full counter!!!");
-    // Get the opposite of the current angular velocity
-    const counterTorque = cannonBody.angularVelocity.clone().negate();
-    cannonBody.angularVelocity.vadd(counterTorque, cannonBody.angularVelocity);
+    
+      // If within the limit, apply the pitch torque
+      const pitchTorque = new CANNON.Vec3(-0.1, 0, 0);
+      cannonBody.angularVelocity.vadd(pitchTorque, cannonBody.angularVelocity);
   }
 }
 
-
-
+if(cannonBody.quaternion.x < -0.2) {
+  console.log("full counter!!!")
+  const counterTorque = new CANNON.Vec3(0.1, 0, 0);
+  cannonBody.angularVelocity.vadd(counterTorque, cannonBody.angularVelocity);
+  cannonBody.applyImpulse(takeoffImpulse, impulsePoint);
+}
 
   document.addEventListener('keyup', (event) => {
     if (event.key === 'k') {

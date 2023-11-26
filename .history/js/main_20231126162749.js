@@ -7,7 +7,7 @@ import { createGround } from './ground.js';
 import { createRocket } from './rocket.js';
 import { RocketPhysics } from './rocketPhysics.js';
 import { createDashboard } from './dashboard.js';
-import { camera, updateCamera,renderer,rotateCameraBy90Degrees,isCameraLocked } from './camera.js';
+import { camera, updateCamera,renderer } from './camera.js';
 
 
 
@@ -47,7 +47,7 @@ document.addEventListener('keydown', (event) => {
   }
 });
 
-
+v
 
 
 

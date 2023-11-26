@@ -202,29 +202,31 @@ export function controlRocket(event,cannonBody) {
     else {
       // If exceeding the limit, apply a counter torque to prevent further tilting
       console.log("full counter!!!")
-      const counterTorque = cannonBody.angularVelocity.clone().negate();
+      const counterTorque = new CANNON.Vec3(-0.1, 0, 0);
       cannonBody.angularVelocity.vadd(counterTorque, cannonBody.angularVelocity);
   }
 }
 
 if (isSKeyDown) {
-  console.log('quaternion', cannonBody.quaternion);
+
+  console.log('quaternion',cannonBody.quaternion)
+
 
   if (cannonBody.quaternion.x > -0.2) {
-    // If within the limit, apply the pitch torque
-    const pitchTorque = new CANNON.Vec3(-0.1, 0, 0);
-    cannonBody.angularVelocity.vadd(pitchTorque, cannonBody.angularVelocity);
-  } else {
-    // If exceeding the limit, apply a counter torque to prevent further tilting
-    console.log("full counter!!!");
-    // Get the opposite of the current angular velocity
-    const counterTorque = cannonBody.angularVelocity.clone().negate();
-    cannonBody.angularVelocity.vadd(counterTorque, cannonBody.angularVelocity);
+    
+      // If within the limit, apply the pitch torque
+      const pitchTorque = new CANNON.Vec3(-0.1, 0, 0);
+      cannonBody.angularVelocity.vadd(pitchTorque, cannonBody.angularVelocity);
   }
+  else {
+    // If exceeding the limit, apply a counter torque to prevent further tilting
+    console.log("full counter!!!")
+    const counterTorque = new CANNON.Vec3(0.1, 0, 0);
+    cannonBody.angularVelocity.vadd(counterTorque, cannonBody.angularVelocity);
+}
 }
 
-
-
+if(cannonBody.quaternion.x )
 
   document.addEventListener('keyup', (event) => {
     if (event.key === 'k') {

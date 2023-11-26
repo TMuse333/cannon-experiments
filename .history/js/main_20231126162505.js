@@ -7,10 +7,12 @@ import { createGround } from './ground.js';
 import { createRocket } from './rocket.js';
 import { RocketPhysics } from './rocketPhysics.js';
 import { createDashboard } from './dashboard.js';
-import { camera, updateCamera,renderer,rotateCameraBy90Degrees,isCameraLocked } from './camera.js';
+import { camera, updateCamera } from './camera.js';
 
 
-
+const renderer = new THREE.WebGLRenderer();
+renderer.setSize(window.innerWidth, window.innerHeight);
+document.body.appendChild(renderer.domElement);
 
 // createDashboard(document)
 
@@ -47,7 +49,22 @@ document.addEventListener('keydown', (event) => {
   }
 });
 
+function rotateCameraBy90Degrees() {
+  console.log('rotation')
+  const currentRotation = camera.rotation.y;
+  const newRotation = currentRotation + Math.PI / 2; // Rotate by 90 degrees
 
+  // Set the new rotation while keeping the same distance from the target
+  const distance = camera.position.distanceTo(targetPosition);
+  const newX = targetPosition.x + distance * Math.sin(newRotation);
+  const newZ = targetPosition.z + distance * Math.cos(newRotation);
+
+  camera.position.set(newX, camera.position.y, newZ);
+  camera.rotation.y = newRotation;
+
+  // Ensure camera is looking at the target
+  camera.lookAt(targetPosition);
+}
 
 
 
